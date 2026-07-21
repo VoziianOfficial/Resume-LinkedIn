@@ -232,7 +232,9 @@
             CodeXml: "code-2",
             "code-xml": "code-2",
             MapPinned: "map-pin",
-            "map-pinned": "map-pin"
+            "map-pinned": "map-pin",
+            BadgeUserRound: "user-round-check",
+            "badge-user-round": "user-round-check"
         };
 
         if (aliases[iconName]) {
