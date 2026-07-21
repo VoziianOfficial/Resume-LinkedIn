@@ -1601,3 +1601,13 @@
         background: #000000;
     }
 }
+
+.legal-page__summary-title,
+.legal-page__contact-title,
+.legal-page__opening-title,
+.legal-section__title,
+.legal-page__closing-title,
+.not-found-page__title,
+.not-found-page__links-title {
+    max-width: min(100%, 24ch);
+}

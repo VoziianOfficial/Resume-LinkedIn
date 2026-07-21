@@ -168,12 +168,12 @@ window.NIMOMARK_CONFIG = {
         {
             "slug": "linkedin-profile-optimization",
             "pageUrl": "linkedin-profile-optimization.html",
-            "fullTitle": "LinkedIn Profile Optimization",
+            "fullTitle": "LinkedIn Profile Support",
             "shortTitle": "LinkedIn Optimization",
-            "metaTitle": "LinkedIn Profile Optimization | NimoMark",
+            "metaTitle": "LinkedIn Profile Support | NimoMark",
             "metaDescription": "Explore LinkedIn profile support for clearer headlines, About sections, experience, skills, and alignment with your resume.",
             "heroEyebrow": "Professional Profile",
-            "heroTitle": "LinkedIn Profile Optimization",
+            "heroTitle": "LinkedIn Profile Support",
             "heroText": "Make your professional direction easier to understand across your headline, About section, experience, and skills.",
             "shortSummary": "LinkedIn positioning support for clearer role direction, experience, skills, and consistency with application materials.",
             "longerIntroduction": "A LinkedIn profile often has to communicate direction before a reader opens a resume. NimoMark helps candidates explore support for improving the headline, About section, experience descriptions, skills direction, and consistency with other materials. The work focuses on professional clarity rather than promises of search ranking, recruiter messages, or profile visibility.",
@@ -868,7 +868,7 @@ window.NIMOMARK_CONFIG = {
     ],
 
     "advertiseCollaborate": {
-        "title": "Advertise & Collaborate",
+        "title": "Advertise and Collaborate",
         "text": "We are always open to new opportunities, high-impact collaborations, and tailored business partnerships. Whether you want to advertise your brand to our audience, launch a joint project, or book our professional services, we are ready to bring your ideas to life. Every business is unique, and we don't believe in one-size-fits-all solutions. Please reach out to us using the contact form below, tell us a bit about your goals, and our team will get back to you with an exclusive, custom-tailored proposal designed strictly for your budget and objectives. Let’s build something great together.",
         "image": "assets/images/contact-collaboration.webp",
         "imageAlt": "Professionals discussing a potential business collaboration",
@@ -902,7 +902,7 @@ window.NIMOMARK_CONFIG = {
             },
             {
                 "value": "linkedin-profile-optimization",
-                "label": "LinkedIn Profile Optimization"
+                "label": "LinkedIn Profile Support"
             },
             {
                 "value": "cover-letter-writing",
@@ -1125,7 +1125,7 @@ window.NIMOMARK_CONFIG = {
             },
             {
                 "id": "contact",
-                "title": "Contact"
+                "title": "Contact Details"
             }
         ],
         "termsSections": [
@@ -1139,7 +1139,7 @@ window.NIMOMARK_CONFIG = {
             },
             {
                 "id": "no-guarantees",
-                "title": "No Guaranteed Outcomes"
+                "title": "No Outcome Guarantees"
             },
             {
                 "id": "no-legal-advice",
@@ -1179,7 +1179,7 @@ window.NIMOMARK_CONFIG = {
             },
             {
                 "id": "liability",
-                "title": "Limitation of Liability"
+                "title": "Liability Limits"
             },
             {
                 "id": "indemnity",
@@ -1187,7 +1187,7 @@ window.NIMOMARK_CONFIG = {
             },
             {
                 "id": "changes",
-                "title": "Changes to These Terms"
+                "title": "Terms Changes"
             },
             {
                 "id": "governing-law",
@@ -1195,7 +1195,7 @@ window.NIMOMARK_CONFIG = {
             },
             {
                 "id": "contact",
-                "title": "Contact"
+                "title": "Contact Details"
             }
         ],
         "cookieSections": [
@@ -1229,7 +1229,7 @@ window.NIMOMARK_CONFIG = {
             },
             {
                 "id": "contact",
-                "title": "Contact"
+                "title": "Contact Details"
             }
         ]
     },
@@ -1297,10 +1297,10 @@ window.NIMOMARK_CONFIG = {
                 "ogDescription": "Explore resume writing support focused on structure, relevance, achievement language, role context, and international market clarity."
             },
             "linkedin-profile-optimization.html": {
-                "title": "LinkedIn Profile Optimization | NimoMark",
+                "title": "LinkedIn Profile Support | NimoMark",
                 "description": "Explore LinkedIn profile support for clearer headlines, About sections, experience, skills, and alignment with your resume.",
                 "canonical": "https://www.nimomark.example/linkedin-profile-optimization.html",
-                "ogTitle": "LinkedIn Profile Optimization | NimoMark",
+                "ogTitle": "LinkedIn Profile Support | NimoMark",
                 "ogDescription": "Explore LinkedIn profile support for clearer headlines, About sections, experience, skills, and alignment with your resume."
             },
             "cover-letter-writing.html": {
@@ -1381,7 +1381,7 @@ window.NIMOMARK_CONFIG = {
             "pageKey": "home",
             "hero": {
                 "eyebrow": "Resume & LinkedIn Marketing for Global Careers",
-                "title": "Make Your Experience Clear to Global Employers.",
+                "title": "Clear Career Direction",
                 "text": "NimoMark is an independent career-support platform helping expats and technology professionals explore clearer resumes, stronger LinkedIn positioning, focused cover letters, interview preparation, and international job-search materials.",
                 "primaryCtaLabel": "Request a Resume Review",
                 "primaryCtaUrl": "contact.html?service=resume-review#contact-form",
@@ -1409,7 +1409,7 @@ window.NIMOMARK_CONFIG = {
             },
             "audience": {
                 "eyebrow": "Who NimoMark supports",
-                "title": "Different backgrounds. One clear career story.",
+                "title": "Different Career Stories",
                 "text": "Professional experience can be strong and still difficult to interpret in a new market. Clear positioning helps employers understand role direction, contribution, and context faster.",
                 "ctaLabel": "Learn About NimoMark",
                 "ctaUrl": "about.html",
@@ -1433,12 +1433,12 @@ window.NIMOMARK_CONFIG = {
             },
             "serviceShowcase": {
                 "eyebrow": "Career support options",
-                "title": "Support shaped around your next move.",
+                "title": "Focused Career Support",
                 "text": "Explore focused services without committing to a package before your context is reviewed."
             },
             "resumeClarity": {
                 "eyebrow": "Resume clarity",
-                "title": "Turn complex experience into clear value.",
+                "title": "Clearer Resume Priorities",
                 "text": "Strong wording explains direction, context, contribution, and relevance without relying on unsupported metrics.",
                 "ctaLabel": "Explore Resume Writing",
                 "ctaUrl": "resume-writing.html",
@@ -1467,7 +1467,7 @@ window.NIMOMARK_CONFIG = {
             },
             "linkedin": {
                 "eyebrow": "Professional profile",
-                "title": "Make your professional direction easier to see.",
+                "title": "Aligned LinkedIn Profile",
                 "text": "A consistent LinkedIn profile helps readers understand the same role direction they see in your resume.",
                 "image": "assets/images/home-linkedin-positioning.webp",
                 "imageAlt": "Professional reviewing career notes near a large window",
@@ -1492,7 +1492,7 @@ window.NIMOMARK_CONFIG = {
             },
             "international": {
                 "eyebrow": "International positioning",
-                "title": "Position your experience for the market ahead.",
+                "title": "Market-Ready Experience",
                 "text": "Market adaptation may involve terminology, employer context, role-title meaning, location details, and clearer explanations of transferable experience.",
                 "image": "assets/images/home-international-positioning.webp",
                 "imageAlt": "Professional walking through an international city business district",
@@ -1506,7 +1506,7 @@ window.NIMOMARK_CONFIG = {
             },
             "examples": {
                 "eyebrow": "Illustrative examples",
-                "title": "See how stronger wording changes the message.",
+                "title": "Clearer Wording Context",
                 "text": "Educational comparisons demonstrate communication principles rather than client outcomes.",
                 "label": "Illustrative example — not a client result.",
                 "image": "assets/images/home-examples.webp",
@@ -1516,7 +1516,7 @@ window.NIMOMARK_CONFIG = {
             },
             "interview": {
                 "eyebrow": "Interview preparation",
-                "title": "Prepare to explain your value clearly.",
+                "title": "Prepare Real Examples",
                 "text": "Build relevant stories, technical explanations, and leadership examples without memorizing a script.",
                 "image": "assets/images/home-interview.webp",
                 "imageAlt": "Candidate taking part in a professional interview conversation",
@@ -1530,7 +1530,7 @@ window.NIMOMARK_CONFIG = {
             },
             "faq": {
                 "eyebrow": "Useful career questions",
-                "title": "Clear answers before you inquire.",
+                "title": "Inquiry Expectations",
                 "items": [
                     {
                         "question": "What information is useful for a resume review?",
@@ -1559,7 +1559,7 @@ window.NIMOMARK_CONFIG = {
                 ]
             },
             "finalCta": {
-                "title": "Ready for a clearer professional profile?",
+                "title": "Clearer Professional Profile",
                 "text": "Share your current material and target direction for an initial inquiry review.",
                 "primaryCtaLabel": "Request a Resume Review",
                 "primaryCtaUrl": "contact.html?service=resume-review#contact-form",
@@ -1581,7 +1581,7 @@ window.NIMOMARK_CONFIG = {
             },
             "introduction": {
                 "eyebrow": "About NimoMark",
-                "title": "Built for careers that cross borders and industries.",
+                "title": "Cross-Border Careers",
                 "paragraphs": [
                     "International experience can be difficult to translate when employers do not know the companies, qualifications, or role-title systems behind it.",
                     "Technical experience can also be clear to peers but too dense for recruiters or business stakeholders. Strong positioning adds relevance, structure, and context without changing the truth of the experience."
@@ -1612,7 +1612,7 @@ window.NIMOMARK_CONFIG = {
                 "International remote candidates"
             ],
             "does": {
-                "title": "What NimoMark helps people explore",
+                "title": "What NimoMark Explores",
                 "items": [
                     "Resume support",
                     "LinkedIn support",
@@ -1623,7 +1623,7 @@ window.NIMOMARK_CONFIG = {
                 ]
             },
             "doesNot": {
-                "title": "What NimoMark does not promise",
+                "title": "No NimoMark Promises",
                 "items": [
                     "Guaranteed employment",
                     "Guaranteed interviews",
@@ -1665,13 +1665,13 @@ window.NIMOMARK_CONFIG = {
                 "Transparent scope"
             ],
             "partnership": {
-                "title": "Advertise or collaborate with NimoMark",
+                "title": "Advertise and Collaborate",
                 "text": "Explore audience-aligned advertising, joint projects, and tailored business partnerships through the contact page.",
-                "ctaLabel": "Advertise & Collaborate",
+                "ctaLabel": "Advertise and Collaborate",
                 "ctaUrl": "contact.html#advertise-collaborate"
             },
             "finalCta": {
-                "title": "Your experience deserves a clearer introduction.",
+                "title": "Clearer Experience Introduction",
                 "ctaLabel": "Request a Resume Review",
                 "ctaUrl": "contact.html?service=resume-review#contact-form"
             }
@@ -1681,14 +1681,14 @@ window.NIMOMARK_CONFIG = {
             "pageKey": "services",
             "hero": {
                 "breadcrumbLabel": "Services",
-                "title": "Practical Support for Global Applications.",
+                "title": "Global Application Support",
                 "text": "Explore career-material and positioning options built around context rather than a fixed template.",
                 "image": "assets/images/hero-services.webp",
                 "imageAlt": "Technology professionals discussing application strategy"
             },
             "introduction": {
                 "eyebrow": "Career support directory",
-                "title": "Career materials designed around context, not templates.",
+                "title": "Context Before Templates",
                 "text": "Formatting affects presentation. Positioning explains direction. Clarity makes experience easier to understand. Role relevance determines what deserves emphasis. Market adaptation adds the context a new audience may need."
             },
             "pathways": [
@@ -1721,13 +1721,13 @@ window.NIMOMARK_CONFIG = {
                 }
             ],
             "alignment": {
-                "title": "Resume and LinkedIn should tell the same story.",
+                "title": "One Career Story",
                 "text": "The formats serve different purposes, but role direction, dates, titles, skills, and professional context should remain consistent.",
                 "image": "assets/images/services-alignment.webp",
                 "imageAlt": "Professional comparing career notes across printed materials"
             },
             "marketContext": {
-                "title": "International applications need context, not cosmetic changes.",
+                "title": "International Context Matters",
                 "text": "Terminology, role titles, qualifications, employer familiarity, location, and work arrangements may affect how experience is interpreted.",
                 "image": "assets/images/services-market-context.webp",
                 "imageAlt": "International business district and commuting professionals"
@@ -1758,7 +1758,7 @@ window.NIMOMARK_CONFIG = {
                 ]
             },
             "finalCta": {
-                "title": "Not sure which service fits your situation?",
+                "title": "Find Your Fit",
                 "text": "Share your current material and target direction for an initial inquiry review.",
                 "ctaLabel": "Request a Resume Review",
                 "ctaUrl": "contact.html?service=resume-review#contact-form"
@@ -1769,7 +1769,7 @@ window.NIMOMARK_CONFIG = {
             "pageKey": "resume-examples",
             "hero": {
                 "breadcrumbLabel": "Resume Examples",
-                "title": "See What Clearer Positioning Looks Like.",
+                "title": "Clearer Positioning Examples",
                 "text": "Educational examples showing how structure, context, and wording can change the message.",
                 "image": "assets/images/hero-examples.webp",
                 "imageAlt": "Career planning notes and application materials on a desk"
@@ -1863,7 +1863,7 @@ window.NIMOMARK_CONFIG = {
                 "Does the material avoid unnecessary confidential information?"
             ],
             "finalCta": {
-                "title": "Need feedback on your own profile?",
+                "title": "Need Profile Feedback",
                 "text": "Submit your current material and explain the role or market you are targeting.",
                 "ctaLabel": "Request a Resume Review",
                 "ctaUrl": "contact.html?service=resume-review#contact-form"
@@ -1874,13 +1874,13 @@ window.NIMOMARK_CONFIG = {
             "pageKey": "contact",
             "hero": {
                 "breadcrumbLabel": "Contact",
-                "title": "Start With a Focused Profile Review.",
+                "title": "Focused Profile Review",
                 "text": "Share your background, target direction, and the type of support or partnership you are considering.",
                 "image": "assets/images/hero-contact.webp",
                 "imageAlt": "Professional career conversation in a modern workspace"
             },
             "introduction": {
-                "title": "Choose the inquiry that matches your purpose.",
+                "title": "Choose Your Inquiry",
                 "text": "Use the form for a resume review, service request, general information, advertising, collaboration, or a tailored business partnership.",
                 "inquiryTypes": [
                     "Resume review",
@@ -1909,7 +1909,7 @@ window.NIMOMARK_CONFIG = {
                 }
             ],
             "faq": {
-                "title": "Contact questions",
+                "title": "Contact Questions",
                 "items": [
                     {
                         "question": "Does submitting the form create a service agreement?",
@@ -1972,7 +1972,7 @@ window.NIMOMARK_CONFIG = {
 
         "notFound": {
             "pageKey": "404",
-            "title": "This page has moved beyond the map.",
+            "title": "Page off the map.",
             "text": "The address may be outdated or the page may have moved. Return home or explore the available career-support services.",
             "homeCtaLabel": "Return Home",
             "homeCtaUrl": "index.html",

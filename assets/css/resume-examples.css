@@ -1359,3 +1359,15 @@
         transform: none;
     }
 }
+
+.examples-introduction__title,
+.examples-achievements__heading h2,
+.examples-it-anatomy__title,
+.examples-newcomer__heading h2,
+.examples-newcomer__statement-title,
+.examples-executive__title,
+.examples-wording__heading h2,
+.examples-checklist__title,
+.examples-cta__title {
+    max-width: min(100%, 24ch);
+}

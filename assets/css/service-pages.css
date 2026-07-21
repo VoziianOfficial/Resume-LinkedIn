@@ -1883,3 +1883,15 @@
         transform: none;
     }
 }
+
+.service-detail__inquiry-title,
+.service-detail__module-title,
+.service-detail__introduction-title,
+.service-audience__title,
+.service-principles__title,
+.service-checklist__title,
+.service-related__title,
+.service-faq-cta__title,
+.service-faq-cta__closing-title {
+    max-width: min(100%, 24ch);
+}

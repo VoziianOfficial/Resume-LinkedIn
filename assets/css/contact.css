@@ -1236,3 +1236,12 @@
         transform: none;
     }
 }
+
+.contact-introduction__title,
+.contact-collaboration__title,
+.contact-form-section__title,
+.contact-after__heading h2,
+.contact-faq__title,
+.contact-closing__title {
+    max-width: min(100%, 24ch);
+}

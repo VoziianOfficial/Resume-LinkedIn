@@ -2244,3 +2244,21 @@
         transform: none;
     }
 }
+
+.home-hero__content {
+    max-width: min(100%, 1120px);
+}
+
+.home-hero__title,
+.home-audience__title,
+.home-service-showcase__heading h2,
+.home-resume-clarity__title,
+.home-linkedin__title,
+.home-packages__heading h2,
+.home-international__title,
+.home-examples__title,
+.home-interview__title,
+.home-faq__title,
+.home-final-cta__title {
+    max-width: min(100%, 24ch);
+}

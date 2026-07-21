@@ -1629,3 +1629,15 @@
         transform: none;
     }
 }
+
+.services-introduction__title,
+.services-directory__heading h2,
+.services-pathways__heading h2,
+.services-packages__heading h2,
+.services-alignment__title,
+.services-market__title,
+.services-process__heading h2,
+.services-faq__title,
+.services-cta__title {
+    max-width: min(100%, 24ch);
+}

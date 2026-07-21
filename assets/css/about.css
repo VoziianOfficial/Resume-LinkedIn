@@ -1622,3 +1622,15 @@
         transform: none;
     }
 }
+
+.about-introduction__title,
+.about-purpose__heading h2,
+.about-audiences__heading h2,
+.about-platform__title,
+.about-transparency__statement-title,
+.about-process__heading h2,
+.about-quality__title,
+.about-partnership__title,
+.about-closing__title {
+    max-width: min(100%, 24ch);
+}
