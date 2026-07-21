@@ -419,6 +419,32 @@
         );
     }
 
+    function getFooterServiceName(service) {
+        const footerServiceNames = {
+            "resume-writing": "Resume Writing",
+            "linkedin-profile-optimization":
+                "LinkedIn Profile Optimization",
+            "cover-letter-writing": "Cover Letter Writing",
+            "it-resume-services": "IT Resume Services",
+            "resume-for-newcomers": "Resume for Newcomers",
+            "executive-resume-services":
+                "Executive Resume Services",
+            "interview-preparation": "Interview Preparation",
+            "international-job-positioning":
+                "International Job Positioning"
+        };
+
+        const slug = getServiceSlug(service);
+
+        return firstDefined(
+            footerServiceNames[slug],
+            service.footerTitle,
+            service.fullTitle,
+            service.shortTitle,
+            getServiceName(service)
+        );
+    }
+
     function getServiceSlug(service) {
         return firstDefined(
             service.slug,
@@ -1120,7 +1146,7 @@
         );
 
         const serviceLinks = services.map((service) => ({
-            label: getServiceName(service),
+            label: getFooterServiceName(service),
             href: getServiceHref(service)
         }));
 

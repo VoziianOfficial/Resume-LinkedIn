@@ -1916,10 +1916,31 @@ h4 {
 }
 
 .site-footer__disclaimer {
+    position: relative;
     max-width: 1180px;
-    color: rgba(255, 255, 255, 0.42);
-    font-size: 0.76rem;
-    line-height: 1.7;
+    padding: 1rem 1.15rem 1rem 1.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.68);
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.075),
+            rgba(255, 255, 255, 0.025));
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.75;
+}
+
+.site-footer__disclaimer::before {
+    position: absolute;
+    top: 0.95rem;
+    bottom: 0.95rem;
+    left: 0.75rem;
+    width: 3px;
+    border-radius: var(--radius-pill);
+    background: var(--gradient-brand);
+    content: "";
 }
 
 .site-footer__meta {
