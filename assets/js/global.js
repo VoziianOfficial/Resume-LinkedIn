@@ -1091,18 +1091,6 @@
         const navigation = getPrimaryNavigation();
         const services = getServices();
         const legalPages = getLegalPages();
-        const email = getContactEmail();
-
-        const footerStatement = firstDefined(
-            getValue(state.config, "footer.statement"),
-            FALLBACK_CONFIG.footer.statement
-        );
-
-        const footerStatementAccent = firstDefined(
-            getValue(state.config, "footer.statementAccent"),
-            "career story."
-        );
-
         const footerDescription = firstDefined(
             getValue(state.config, "footer.description"),
             getValue(state.config, "brand.shortDescription"),
@@ -1113,12 +1101,6 @@
             getValue(state.config, "footer.disclaimer"),
             getValue(state.config, "company.disclaimer"),
             FALLBACK_CONFIG.footer.disclaimer
-        );
-
-        const companyAddress = firstDefined(
-            getValue(state.config, "company.address"),
-            getValue(state.config, "contact.address"),
-            ""
         );
 
         const companyName = firstDefined(
@@ -1144,58 +1126,8 @@
 
         const year = new Date().getFullYear();
 
-        const formattedStatement = footerStatement.includes(
-            footerStatementAccent
-        )
-            ? escapeHtml(footerStatement).replace(
-                escapeHtml(footerStatementAccent),
-                `<span class="site-footer__statement-accent">${escapeHtml(
-                    footerStatementAccent
-                )}</span>`
-            )
-            : escapeHtml(footerStatement);
-
         mount.innerHTML = `
       <footer class="site-footer">
-        <div class="site-footer__primary">
-          <h2 class="site-footer__statement">
-            ${formattedStatement}
-          </h2>
-
-          <div class="site-footer__contact">
-            <span class="site-footer__contact-label">
-              Start with an inquiry
-            </span>
-
-            <a
-              class="site-footer__email"
-              href="mailto:${escapeAttribute(email)}"
-            >
-              ${escapeHtml(email)}
-            </a>
-
-            ${companyAddress
-                ? `
-                  <p class="site-footer__address">
-                    ${escapeHtml(companyAddress)}
-                  </p>
-                `
-                : ""
-            }
-
-            <a
-              class="site-button site-button--primary"
-              href="contact.html"
-            >
-              <span>Contact NimoMark</span>
-
-              <span class="site-button__icon">
-                ${renderLucideIcon("arrow-up-right")}
-              </span>
-            </a>
-          </div>
-        </div>
-
         <div class="site-footer__middle">
           <div class="site-footer__columns">
             <div class="site-footer__brand">

@@ -56,7 +56,7 @@ window.NIMOMARK_CONFIG = {
                 "key": "resume-examples"
             },
             {
-                "label": "Contact",
+                "label": "Contact Details",
                 "url": "contact.html",
                 "key": "contact"
             }
@@ -992,7 +992,7 @@ window.NIMOMARK_CONFIG = {
                 "url": "resume-examples.html"
             },
             {
-                "label": "Contact",
+                "label": "Contact Details",
                 "url": "contact.html"
             }
         ],
@@ -1097,7 +1097,7 @@ window.NIMOMARK_CONFIG = {
             },
             {
                 "id": "retention",
-                "title": "Information Retention"
+                "title": "Information Storage Retention"
             },
             {
                 "id": "security",
@@ -1873,7 +1873,7 @@ window.NIMOMARK_CONFIG = {
         "contact": {
             "pageKey": "contact",
             "hero": {
-                "breadcrumbLabel": "Contact",
+                "breadcrumbLabel": "Contact Details",
                 "title": "Focused Profile Review",
                 "text": "Share your background, target direction, and the type of support or partnership you are considering.",
                 "image": "assets/images/hero-contact.webp",
