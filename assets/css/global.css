@@ -1593,8 +1593,12 @@ h4 {
 
 .site-form__checkbox {
     position: relative;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
     width: 24px;
     height: 24px;
+    margin: 0.12rem 0 0;
     appearance: none;
     border: 1px solid var(--color-line-strong);
     border-radius: 0.42rem;
@@ -1607,14 +1611,14 @@ h4 {
 
 .site-form__checkbox::after {
     position: absolute;
-    top: 4px;
-    left: 7px;
+    top: 50%;
+    left: 50%;
     width: 7px;
     height: 12px;
     border-right: 2px solid var(--color-white);
     border-bottom: 2px solid var(--color-white);
     opacity: 0;
-    transform: rotate(45deg) scale(0.6);
+    transform: translate(-50%, -58%) rotate(45deg) scale(0.6);
     transition:
         opacity var(--transition-fast),
         transform var(--transition-fast);
@@ -1628,7 +1632,7 @@ h4 {
 
 .site-form__checkbox:checked::after {
     opacity: 1;
-    transform: rotate(45deg) scale(1);
+    transform: translate(-50%, -58%) rotate(45deg) scale(1);
 }
 
 .site-form__checkbox:focus-visible {
