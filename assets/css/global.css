@@ -2765,3 +2765,31 @@ main,
         max-width: min(100%, 18ch) !important;
     }
 }
+
+@media (max-width: 768px) {
+    :where(.home-entry-points__grid,
+        .about-platform__directory,
+        .examples-newcomer__rows) {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(85, 199, 255, 0.45) transparent;
+    }
+
+    :where(.home-entry-points__grid,
+        .about-platform__directory,
+        .examples-newcomer__rows)::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    :where(.home-entry-points__grid,
+        .about-platform__directory,
+        .examples-newcomer__rows)::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    :where(.home-entry-points__grid,
+        .about-platform__directory,
+        .examples-newcomer__rows)::-webkit-scrollbar-thumb {
+        border-radius: var(--radius-pill);
+        background: rgba(85, 199, 255, 0.45);
+    }
+}

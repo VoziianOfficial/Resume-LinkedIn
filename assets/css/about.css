@@ -2831,6 +2831,97 @@
     }
 }
 
+@media (max-width: 768px) {
+    .about-platform {
+        padding-block: clamp(2.8rem, 8vw, 4rem);
+    }
+
+    .about-platform__layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .about-platform__intro {
+        max-width: 720px;
+        margin-inline: auto;
+        gap: 0.85rem;
+        text-align: center;
+    }
+
+    .about-platform__text {
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .about-platform__directory {
+        display: flex;
+        gap: 1rem;
+        margin-inline: calc(var(--container-gutter) * -1);
+        overflow-x: auto;
+        border-top: 0;
+        padding-inline: var(--container-gutter);
+        padding-block: 0.2rem 0.75rem;
+        scroll-padding-inline: var(--container-gutter);
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .about-platform__entry {
+        flex: 0 0 min(82vw, 310px);
+        min-height: 240px;
+        grid-template-columns: 46px minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+        align-items: start;
+        gap: 0.85rem 1rem;
+        padding: 1.2rem;
+        border: 1px solid var(--color-line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        scroll-snap-align: center;
+    }
+
+    .about-platform__entry:hover,
+    .about-platform__entry:focus-within {
+        padding-inline: 1.2rem;
+    }
+
+    .about-platform__entry-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .about-platform__entry-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .about-platform__entry-content {
+        gap: 0.45rem;
+    }
+
+    .about-platform__entry-title {
+        font-size: 1.14rem;
+        line-height: 1.2;
+    }
+
+    .about-platform__entry-text {
+        display: -webkit-box;
+        overflow: hidden;
+        font-size: 0.84rem;
+        line-height: 1.55;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+    }
+
+    .about-platform__entry-link {
+        grid-column: 1 / -1;
+        justify-self: start;
+        width: 38px;
+        height: 38px;
+        margin-top: 0.25rem;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
     .about-service-mosaic__card,
