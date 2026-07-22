@@ -51,7 +51,8 @@
                 "Build a resume around a clear professional direction.",
             introductionText:
                 "Resume support can help organize experience, clarify responsibilities and present relevant contribution without inventing qualifications or guaranteeing outcomes.",
-            image: "assets/images/service-resume-writing.webp",
+            image: "assets/images/service-resume-writing.avif",
+            supportingImage: "assets/images/home-resume-examples.avif",
             imageAlt:
                 "Professional reviewing a structured resume document"
         },
@@ -68,7 +69,8 @@
                 "Create a more consistent professional profile.",
             introductionText:
                 "LinkedIn profile support can help align your headline, summary, experience and skills with an intended professional direction while preserving accurate career information.",
-            image: "assets/images/service-linkedin-profile.webp",
+            image: "assets/images/service-linkedin-profile.avif",
+            supportingImage: "assets/images/about-career-conversation.avif",
             imageAlt:
                 "Professional reviewing a career profile on a laptop"
         },
@@ -85,7 +87,8 @@
                 "Add relevant context without repeating the resume.",
             introductionText:
                 "Cover-letter support can help connect selected experience with a specific opportunity, explain professional motivation and keep the message focused.",
-            image: "assets/images/service-cover-letter.webp",
+            image: "assets/images/service-cover-letter.avif",
+            supportingImage: "assets/images/services-material-alignment.avif",
             imageAlt:
                 "Professional preparing a focused cover letter"
         },
@@ -102,7 +105,8 @@
                 "Connect technical skills with practical contribution.",
             introductionText:
                 "Technical resume support can help explain how tools were used, what systems or workflows were involved and where individual contribution fits within collaborative work.",
-            image: "assets/images/service-it-resume.webp",
+            image: "assets/images/service-it-resume.avif",
+            supportingImage: "assets/images/services-career-benefits.avif",
             imageAlt:
                 "Technology professional reviewing technical career documents"
         },
@@ -119,7 +123,8 @@
                 "Translate experience into a new market context.",
             introductionText:
                 "Newcomer resume support can help preserve valuable international experience, explain transferable skills and adapt presentation conventions without inventing local credentials.",
-            image: "assets/images/service-newcomer-resume.webp",
+            image: "assets/images/service-newcomer-resume.avif",
+            supportingImage: "assets/images/contact-collaboration.avif",
             imageAlt:
                 "International professional preparing career materials"
         },
@@ -136,7 +141,8 @@
                 "Present leadership scope with credible business context.",
             introductionText:
                 "Executive resume support can help organize leadership experience around strategic priorities, decision ownership, stakeholder environments and supported business contribution.",
-            image: "assets/images/service-executive-resume.webp",
+            image: "assets/images/service-executive-resume.avif",
+            supportingImage: "assets/images/about-career-team.avif",
             imageAlt:
                 "Senior professional reviewing executive career documents"
         },
@@ -154,7 +160,8 @@
             introductionText:
                 "Interview preparation can help organize professional examples, clarify likely discussion areas and improve readiness without scripting false experiences or promising a successful outcome.",
             image:
-                "assets/images/service-interview-preparation.webp",
+                "assets/images/service-interview-preparation.avif",
+            supportingImage: "assets/images/about-career-detail.avif",
             imageAlt:
                 "Professional preparing for a structured interview"
         },
@@ -172,7 +179,8 @@
             introductionText:
                 "International positioning support can help review transferable experience, local conventions and connected career materials without providing immigration or legal advice.",
             image:
-                "assets/images/service-international-positioning.webp",
+                "assets/images/service-international-positioning.avif",
+            supportingImage: "assets/images/examples-resume-clarity.avif",
             imageAlt:
                 "Professional planning an international career transition"
         }
@@ -1228,12 +1236,26 @@
         return firstDefined(
             service.servicePageImage,
             service.heroImage,
+            service.mainImage,
             service.image,
             service.cardImage,
             service.images?.hero,
+            service.images?.main,
             service.images?.service,
             service.images?.card,
-            "assets/images/service-career-support.webp"
+            "assets/images/services-career-benefits.avif"
+        );
+    }
+
+    function getServiceSupportingImage(service) {
+        return firstDefined(
+            service.supportingImage,
+            service.secondaryImage,
+            service.principlesImage,
+            service.images?.supporting,
+            service.images?.secondary,
+            service.images?.principles,
+            getServiceImage(service)
         );
     }
 
@@ -1243,6 +1265,16 @@
             service.alt,
             service.images?.alt,
             `${getServiceTitle(service)} career support`
+        );
+    }
+
+    function getServiceSupportingImageAlt(service) {
+        return firstDefined(
+            service.supportingImageAlt,
+            service.secondaryImageAlt,
+            service.images?.supportingAlt,
+            service.images?.secondaryAlt,
+            getServiceImageAlt(service)
         );
     }
 
@@ -1686,10 +1718,15 @@
 
         document
             .querySelectorAll(SELECTORS.serviceImage)
-            .forEach((image) => {
+            .forEach((image, index) => {
+                const imageSource =
+                    index === 0
+                        ? getServiceImage(service)
+                        : getServiceSupportingImage(service);
+
                 image.setAttribute(
                     "src",
-                    getServiceImage(service)
+                    imageSource
                 );
 
                 if (!image.hasAttribute("width")) {
@@ -1705,10 +1742,15 @@
 
         document
             .querySelectorAll(SELECTORS.serviceImageAlt)
-            .forEach((image) => {
+            .forEach((image, index) => {
+                const altText =
+                    index === 0
+                        ? getServiceImageAlt(service)
+                        : getServiceSupportingImageAlt(service);
+
                 image.setAttribute(
                     "alt",
-                    getServiceImageAlt(service)
+                    altText
                 );
             });
 

@@ -2703,7 +2703,7 @@ body {
     }
 }
 
-/* Фото в верхней секции сервиса — в два раза ниже */
+
 .service-detail__leading-image {
     width: 100%;
     height: clamp(235px, 27vw, 360px);
@@ -2733,3 +2733,4 @@ body {
         max-height: 220px;
     }
 }
+
