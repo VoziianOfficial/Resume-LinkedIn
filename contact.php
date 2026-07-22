@@ -433,9 +433,7 @@ function loadSiteConfig(): array
     $configPath =
         __DIR__ .
         DIRECTORY_SEPARATOR .
-        'assets' .
-        DIRECTORY_SEPARATOR .
-        'js' .
+        'config' .
         DIRECTORY_SEPARATOR .
         'config.js';
 
@@ -583,7 +581,7 @@ function getRecipientEmail(
         respond(
             503,
             false,
-            'The contact form recipient has not been configured. Replace the placeholder email in assets/js/config.js with a real business email address.'
+            'The contact form recipient has not been configured. Replace the placeholder email in config/config.js with a real business email address.'
         );
     }
 

@@ -990,7 +990,7 @@ window.NIMOMARK_CONFIG = {
         "successTitle": "Your inquiry was sent.",
         "successMessage": "Thank you. The request was submitted for review. This confirmation does not create a service agreement or guarantee provider availability.",
         "errorMessage": "The inquiry could not be sent. Review the highlighted fields or contact NimoMark by email.",
-        "configurationError": "The form recipient is still configured with a placeholder .example address. Replace it in assets/js/config.js before enabling live email delivery.",
+        "configurationError": "The form recipient is still configured with a placeholder .example address. Replace it in config/config.js before enabling live email delivery.",
         "validationMessages": {
             "fullNameRequired": "Enter your full name.",
             "fullNameTooLong": "Keep your name within 120 characters.",
