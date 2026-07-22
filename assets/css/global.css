@@ -729,9 +729,33 @@ h4 {
     align-items: center;
 }
 
-.site-header__brand img {
-    width: clamp(190px, 14vw, 232px);
-    height: auto;
+.site-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    max-width: min(232px, 56vw);
+    color: #ffffff;
+}
+
+.site-brand-logo--dark {
+    color: #101012;
+}
+
+.site-brand-logo__icon {
+    width: clamp(38px, 3.5vw, 46px);
+    height: clamp(38px, 3.5vw, 46px);
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+
+.site-brand-logo__text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: currentColor;
+    font-family: "Space Grotesk", "Manrope", Arial, sans-serif;
+    font-size: clamp(1.35rem, 1.8vw, 1.95rem);
+    font-weight: 700;
+    line-height: 0.95;
 }
 
 .site-header__navigation {
@@ -991,8 +1015,8 @@ h4 {
     align-items: center;
 }
 
-.mobile-navigation__brand img {
-    width: min(210px, 62vw);
+.mobile-navigation__brand .site-brand-logo {
+    max-width: min(210px, 62vw);
 }
 
 .mobile-navigation__close {
@@ -1855,9 +1879,8 @@ h4 {
     gap: 1.2rem;
 }
 
-.site-footer__logo img {
-    width: min(230px, 76vw);
-    filter: brightness(0) invert(1);
+.site-footer__logo .site-brand-logo {
+    max-width: min(230px, 76vw);
 }
 
 .site-footer__description {
@@ -2109,8 +2132,8 @@ h4 {
         gap: 1rem;
     }
 
-    .site-header__brand img {
-        width: 188px;
+    .site-header__brand .site-brand-logo {
+        max-width: 188px;
     }
 
     .site-navigation__list {
@@ -2181,8 +2204,8 @@ h4 {
         scroll-padding-top: calc(var(--header-height-scrolled) + 16px);
     }
 
-    .site-header__brand img {
-        width: min(184px, 58vw);
+    .site-header__brand .site-brand-logo {
+        max-width: min(184px, 58vw);
     }
 
     .site-section__heading {
@@ -2402,8 +2425,8 @@ h4 {
         height: 1.8rem;
     }
 
-    .site-header__brand img {
-        width: 168px;
+    .site-header__brand .site-brand-logo {
+        max-width: 168px;
     }
 
     .site-header__menu-button,

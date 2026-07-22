@@ -1,24 +1,24 @@
 window.NIMOMARK_CONFIG = {
 
-    identity: {
-        name: "NimoMark",
+    "identity": {
+        "name": "NimoMark",
 
-        legalName:
+        "legalName":
             "NimoMark Career Media LLC",
 
-        email:
+        "email":
             "hello@nimomark.example",
 
-        phone:
+        "phone":
             "",
 
-        phoneDisplay:
+        "phoneDisplay":
             "",
 
-        address:
+        "address":
             "120 Meridian Avenue, Suite 410, Wilmington, DE 19801, United States",
 
-        mapUrl:
+        "mapUrl":
             "https://www.google.com/maps/search/?api=1&query=120%20Meridian%20Avenue%20Suite%20410%20Wilmington%20DE%2019801"
     },
     
@@ -28,6 +28,8 @@ window.NIMOMARK_CONFIG = {
         "tagline": "Shape Your Experience for Global Careers.",
         "shortDescription": "An independent career-support and provider-matching platform helping expats, newcomers, international candidates, and technology professionals explore clearer resume, LinkedIn, interview, and career-positioning options.",
         "footerStatement": "Clearer career materials for international opportunities.",
+        "logoText": "NimoMark",
+        "logoIconPath": "assets/images/logo-icon.svg",
         "logoPath": "assets/images/logo.svg",
         "faviconPath": "assets/images/favicon.svg"
     },

@@ -569,10 +569,13 @@ function getRecipientEmail(
     $email = firstConfigString(
         $config,
         [
+            'identity.email',
+            'contact.email',
+            'contact.formRecipientEmail',
             'form.recipientEmail',
             'form.recipient',
             'contact.recipientEmail',
-            'contact.email',
+            'contact.corporateEmail',
             'company.email',
         ]
     );
@@ -595,6 +598,7 @@ function getSenderEmail(
     $configuredSender = firstConfigString(
         $config,
         [
+            'identity.email',
             'form.fromEmail',
             'contact.fromEmail',
             'company.fromEmail',
@@ -617,6 +621,7 @@ function getBrandName(array $config): string
     $brandName = firstConfigString(
         $config,
         [
+            'identity.name',
             'brand.name',
             'company.displayName',
             'company.legalName',

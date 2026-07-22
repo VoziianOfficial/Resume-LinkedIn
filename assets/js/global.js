@@ -36,6 +36,8 @@
         brand: {
             name: "NimoMark",
             tagline: "Career direction made clearer.",
+            logoText: "NimoMark",
+            logoIconPath: "assets/images/logo-icon.svg",
             logo: "assets/images/logo.svg",
             favicon: "assets/images/favicon.svg"
         },
@@ -526,6 +528,25 @@
         );
     }
 
+    function getBrandLogoText() {
+        return firstDefined(
+            getValue(state.config, "brand.logoText"),
+            getValue(state.config, "brand.text"),
+            getBrandName()
+        );
+    }
+
+    function getBrandLogoIconPath() {
+        return firstDefined(
+            getValue(state.config, "brand.logoIconPath"),
+            getValue(state.config, "brand.logoIcon"),
+            getValue(state.config, "brand.logoPath"),
+            getValue(state.config, "brand.logo"),
+            FALLBACK_CONFIG.brand.logoIconPath,
+            FALLBACK_CONFIG.brand.logo
+        );
+    }
+
     function getContactEmail() {
         return firstDefined(
             getValue(state.config, "contact.email"),
@@ -704,127 +725,33 @@
 
     function renderBrandLogo(theme = "light", instanceId = "default") {
         const brandName = getBrandName();
-        const textColor =
-            theme === "dark" ? "#101012" : "#FFFFFF";
-
-        const safeId = String(instanceId).replace(
-            /[^a-zA-Z0-9_-]/g,
-            ""
-        );
-
-        const gradientId = `nimomark-brand-gradient-${safeId}`;
-        const highlightId = `nimomark-brand-highlight-${safeId}`;
+        const logoText = getBrandLogoText();
+        const logoIconPath = getBrandLogoIconPath();
+        const themeClass =
+            theme === "dark"
+                ? "site-brand-logo--dark"
+                : "site-brand-logo--light";
 
         return `
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="232"
-        height="54"
-        viewBox="0 0 320 72"
-        fill="none"
-        role="img"
+      <span
+        class="site-brand-logo ${themeClass}"
+        data-logo-instance="${escapeAttribute(instanceId)}"
         aria-label="${escapeAttribute(brandName)}"
-        style="width:clamp(190px,14vw,232px);height:auto;max-width:100%;"
       >
-        <defs>
-          <linearGradient
-            id="${gradientId}"
-            x1="10"
-            y1="8"
-            x2="63"
-            y2="66"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stop-color="#FFB15C"></stop>
-            <stop offset="0.42" stop-color="#FF5A36"></stop>
-            <stop offset="0.72" stop-color="#D64FD8"></stop>
-            <stop offset="1" stop-color="#8D63FF"></stop>
-          </linearGradient>
-
-          <linearGradient
-            id="${highlightId}"
-            x1="18"
-            y1="14"
-            x2="50"
-            y2="58"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop
-              offset="0"
-              stop-color="#FFFFFF"
-              stop-opacity="0.42"
-            ></stop>
-            <stop
-              offset="1"
-              stop-color="#FFFFFF"
-              stop-opacity="0"
-            ></stop>
-          </linearGradient>
-        </defs>
-
-        <circle
-          cx="36"
-          cy="36"
-          r="28"
-          fill="url(#${gradientId})"
-        ></circle>
-
-        <circle
-          cx="36"
-          cy="36"
-          r="27.25"
-          stroke="#FFFFFF"
-          stroke-opacity="0.22"
-          stroke-width="1.5"
-        ></circle>
-
-        <path
-          d="M15.5 17.5C24.5 9.6 39.6 7.1 51.7 14.2C36.6 13.8 24.3 20.5 17.2 31.4C14.3 26.9 13.6 22.2 15.5 17.5Z"
-          fill="url(#${highlightId})"
-        ></path>
-
-        <path
-          d="M21 51V21H28.2L43.8 41.4V21H51V51H43.8L28.2 30.6V51H21Z"
-          fill="#FFFFFF"
-        ></path>
-
-        <path
-          d="M27.8 21L51 51H43.7L20.7 21H27.8Z"
-          fill="#101012"
-          fill-opacity="0.16"
-        ></path>
-
-        <text
-          x="79"
-          y="47"
-          fill="${textColor}"
-          font-family="'Space Grotesk', 'Manrope', Arial, sans-serif"
-          font-size="31"
-          font-weight="700"
-          letter-spacing="-1.2"
+        <img
+          class="site-brand-logo__icon"
+          src="${escapeAttribute(logoIconPath)}"
+          alt=""
+          width="72"
+          height="72"
+          loading="eager"
+          decoding="async"
         >
-          Nimo
-        </text>
 
-        <text
-          x="153"
-          y="47"
-          fill="${textColor}"
-          font-family="'Space Grotesk', 'Manrope', Arial, sans-serif"
-          font-size="31"
-          font-weight="500"
-          letter-spacing="-1.2"
-        >
-          Mark
-        </text>
-
-        <circle
-          cx="247"
-          cy="21"
-          r="3"
-          fill="#55C7FF"
-        ></circle>
-      </svg>
+        <span class="site-brand-logo__text">
+          ${escapeHtml(logoText)}
+        </span>
+      </span>
     `;
     }
 
