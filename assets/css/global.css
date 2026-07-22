@@ -2724,3 +2724,44 @@ main,
         height: auto;
     }
 }
+
+@media (max-width: 1024px) {
+    :where(h1, h2) {
+        max-width: min(100%, 24ch) !important;
+        margin-inline: auto !important;
+        text-align: center !important;
+        text-wrap: balance;
+    }
+
+    :where(.internal-hero__content,
+        .site-section__heading,
+        .site-section__heading--center,
+        .site-section__heading--split,
+        [class$="__heading"],
+        [class$="__intro"]) {
+        justify-items: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    :where(section, .internal-hero) :where(h1, h2) {
+        justify-self: center !important;
+        align-self: center;
+    }
+
+    .internal-hero__content {
+        align-items: center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    :where(h1, h2) {
+        max-width: min(100%, 21ch) !important;
+    }
+}
+
+@media (max-width: 560px) {
+    :where(h1, h2) {
+        max-width: min(100%, 18ch) !important;
+    }
+}
