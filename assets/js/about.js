@@ -470,6 +470,9 @@
 
         return firstDefined(
             entry.title,
+            entry.fullTitle,
+            entry.shortTitle,
+            entry.heroTitle,
             entry.name,
             entry.label,
             fallback
@@ -511,6 +514,7 @@
         return firstDefined(
             entry.href,
             entry.url,
+            entry.pageUrl,
             fallback
         );
     }
@@ -784,10 +788,24 @@
             ""
         );
 
+        const serviceNames = {
+            "resume-writing": "Resume Writing",
+            "linkedin-profile-optimization":
+                "LinkedIn Profile Optimization",
+            "cover-letter-writing": "Cover Letter Writing",
+            "it-resume-services": "IT Resume Services",
+            "resume-for-newcomers": "Resume for Newcomers",
+            "executive-resume-services":
+                "Executive Resume Services",
+            "interview-preparation": "Interview Preparation",
+            "international-job-positioning":
+                "International Job Positioning"
+        };
+
         return {
-            title: getEntryTitle(
-                entry,
-                "Career support service"
+            title: firstDefined(
+                serviceNames[slug],
+                getEntryTitle(entry, "Career support service")
             ),
             text: getEntryText(entry),
             icon: getEntryIcon(

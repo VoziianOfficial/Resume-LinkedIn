@@ -415,6 +415,9 @@
     function getServiceName(service) {
         return firstDefined(
             service.title,
+            service.fullTitle,
+            service.shortTitle,
+            service.heroTitle,
             service.name,
             service.label,
             "Career support service"
@@ -669,7 +672,7 @@
         const serviceLinks = services
             .map((service) => {
                 const href = getServiceHref(service);
-                const name = getServiceName(service);
+                const name = getFooterServiceName(service);
                 const icon = getServiceIcon(service);
                 const currentAttribute = isCurrentPage(href)
                     ? ' aria-current="page"'
