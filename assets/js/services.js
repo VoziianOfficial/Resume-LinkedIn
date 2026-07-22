@@ -13,9 +13,14 @@
         marketTopics: "[data-services-market-topics]",
         processTrack: "[data-services-process-track]",
         faq: "[data-services-faq]",
-        parallaxMedia: "[data-services-parallax]",
-        revealGroup: "[data-services-reveal-group]",
-        revealItem: "[data-services-reveal-item]"
+        focusSlider:
+            "[data-services-focus-slider]",
+        focusSliderWrapper:
+            "[data-services-focus-wrapper]",
+        focusSliderPrevious:
+            "[data-services-focus-previous]",
+        focusSliderNext:
+            "[data-services-focus-next]",
     };
 
     const FALLBACK_SERVICES = [
@@ -377,7 +382,11 @@
         revealObserver: null,
         parallaxElements: [],
         parallaxFrame: null,
-        reducedMotion: false
+        reducedMotion: false,
+        focusSlider: null,
+        focusSliderMode: "",
+        focusSliderResizeTimer: null,
+        focusSliderResizeBound: false
     };
 
     function onDocumentReady(callback) {
@@ -691,6 +700,286 @@
         return getServices().find(
             (service) => getServiceSlug(service) === slug
         );
+    }
+
+    function getFocusServiceCategory(service) {
+        return firstDefined(
+            service.category,
+            service.tag,
+            service.audience,
+            "Career support"
+        );
+    }
+
+    function getFocusServiceContent(service) {
+        const slug = getServiceSlug(service);
+
+        const fallbackService = FALLBACK_SERVICES.find(
+            (entry) => entry.slug === slug
+        );
+
+        return {
+            title: firstDefined(
+                service.title,
+                service.name,
+                service.label,
+                fallbackService?.title,
+                "Career Support"
+            ),
+
+            description: firstDefined(
+                service.servicesPageDescription,
+                service.shortDescription,
+                service.summary,
+                service.description,
+                fallbackService?.shortDescription,
+                "Explore focused support for clearer professional communication."
+            ),
+
+            href: firstDefined(
+                service.href,
+                service.url,
+                fallbackService?.href,
+                slug ? `${slug}.html` : "services.html"
+            ),
+
+            icon: firstDefined(
+                service.icon,
+                service.iconName,
+                service.lucideIcon,
+                fallbackService?.icon,
+                "briefcase-business"
+            )
+        };
+    }
+
+    function renderFocusSlider() {
+        const wrapper = document.querySelector(
+            SELECTORS.focusSliderWrapper
+        );
+
+        if (!wrapper) {
+            return;
+        }
+
+        wrapper.innerHTML = getServices()
+            .map((service) => {
+                const content =
+                    getFocusServiceContent(service);
+
+                return `
+                <article
+                    class="services-focus-slider__slide swiper-slide"
+                >
+                    <a
+                        class="services-focus-slider__card"
+                        href="${escapeAttribute(content.href)}"
+                        aria-label="Explore ${escapeAttribute(
+                    content.title
+                )}"
+                    >
+                        <span
+                            class="services-focus-slider__icon"
+                            aria-hidden="true"
+                        >
+                            ${renderIcon(content.icon)}
+                        </span>
+
+                        <div class="services-focus-slider__card-content">
+                            <h3 class="services-focus-slider__card-title">
+                                ${escapeHtml(content.title)}
+                            </h3>
+
+                            <p class="services-focus-slider__card-text">
+                                ${escapeHtml(content.description)}
+                            </p>
+
+                            <span class="services-focus-slider__card-link">
+                                Explore service
+
+                                ${renderIcon("arrow-up-right")}
+                            </span>
+                        </div>
+                    </a>
+                </article>
+            `;
+            })
+            .join("");
+    }
+
+    function getFocusSliderMode() {
+        return window.innerWidth >= 900
+            ? "vertical"
+            : "horizontal";
+    }
+
+    function createFocusSlider() {
+        const sliderElement = document.querySelector(
+            SELECTORS.focusSlider
+        );
+
+        if (
+            !sliderElement ||
+            typeof window.Swiper !== "function"
+        ) {
+            return;
+        }
+
+        if (state.focusSlider) {
+            state.focusSlider.destroy(true, true);
+            state.focusSlider = null;
+        }
+
+        const section = sliderElement.closest(
+            ".services-focus-slider"
+        );
+
+        if (!section) {
+            return;
+        }
+
+        const desktop = window.matchMedia(
+            "(min-width: 900px)"
+        ).matches;
+
+        const previousButton = section.querySelector(
+            SELECTORS.focusSliderPrevious
+        );
+
+        const nextButton = section.querySelector(
+            SELECTORS.focusSliderNext
+        );
+
+        state.focusSliderMode = desktop
+            ? "vertical"
+            : "horizontal";
+
+        state.focusSlider = new window.Swiper(
+            sliderElement,
+            {
+                direction: desktop
+                    ? "vertical"
+                    : "horizontal",
+
+                slidesPerView: desktop
+                    ? 2.18
+                    : "auto",
+
+                centeredSlides: desktop,
+                initialSlide: desktop ? 1 : 0,
+                spaceBetween: desktop ? 24 : 16,
+
+                speed: 760,
+                loop: false,
+                rewind: true,
+                grabCursor: true,
+                watchOverflow: true,
+                observer: true,
+                observeParents: true,
+                resizeObserver: true,
+                updateOnWindowResize: true,
+
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true
+                },
+
+                navigation:
+                    previousButton && nextButton
+                        ? {
+                            prevEl: previousButton,
+                            nextEl: nextButton
+                        }
+                        : undefined,
+
+                a11y: {
+                    enabled: true,
+                    prevSlideMessage:
+                        "Previous career support service",
+                    nextSlideMessage:
+                        "Next career support service",
+                    firstSlideMessage:
+                        "This is the first career support service",
+                    lastSlideMessage:
+                        "This is the last career support service"
+                },
+
+                on: {
+                    init(swiper) {
+                        swiper.update();
+                        refreshIcons(section);
+                    },
+
+                    slideChange() {
+                        refreshIcons(section);
+                    },
+
+                    resize(swiper) {
+                        swiper.update();
+                    }
+                }
+            }
+        );
+
+        window.requestAnimationFrame(() => {
+            state.focusSlider?.update();
+            refreshIcons(section);
+        });
+    }
+
+    function handleFocusSliderResize() {
+        window.clearTimeout(
+            state.focusSliderResizeTimer
+        );
+
+        state.focusSliderResizeTimer =
+            window.setTimeout(() => {
+                const nextMode = getFocusSliderMode();
+
+                if (
+                    state.focusSliderMode !== nextMode
+                ) {
+                    createFocusSlider();
+                    return;
+                }
+
+                if (state.focusSlider) {
+                    state.focusSlider.update();
+                }
+            }, 160);
+    }
+
+    function initializeFocusSlider() {
+        const sliderElement = document.querySelector(
+            SELECTORS.focusSlider
+        );
+
+        if (!sliderElement) {
+            return;
+        }
+
+        if (typeof window.Swiper !== "function") {
+            window.setTimeout(
+                initializeFocusSlider,
+                120
+            );
+
+            return;
+        }
+
+        createFocusSlider();
+
+        if (!state.focusSliderResizeBound) {
+            state.focusSliderResizeBound = true;
+
+            window.addEventListener(
+                "resize",
+                handleFocusSliderResize,
+                {
+                    passive: true
+                }
+            );
+        }
     }
 
     function renderIntroductionPrinciples() {
@@ -1867,8 +2156,12 @@
         renderProcess();
         renderFaq();
 
+        renderFocusSlider();
+
         initializeRevealGroups();
         initializeParallax();
+
+        initializeFocusSlider();
 
         injectServicesSchema();
 
