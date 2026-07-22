@@ -172,6 +172,109 @@
         return result;
     }
 
+    function normalizeIdentityConfig(config) {
+        const identity = config.identity || {};
+
+        config.brand = config.brand || {};
+        config.company = config.company || {};
+        config.contact = config.contact || {};
+        config.form = config.form || {};
+        config.footer = config.footer || {};
+
+        const name = String(
+            identity.name ||
+            config.brand.name ||
+            "NimoMark"
+        ).trim();
+
+        const legalName = String(
+            identity.legalName ||
+            config.company.legalName ||
+            name
+        ).trim();
+
+        const email = String(
+            identity.email ||
+            config.contact.email ||
+            config.contact.corporateEmail ||
+            ""
+        ).trim();
+
+        const phone = String(
+            identity.phone ||
+            config.contact.phone ||
+            ""
+        ).trim();
+
+        const phoneDisplay = String(
+            identity.phoneDisplay ||
+            phone
+        ).trim();
+
+        const address = String(
+            identity.address ||
+            config.company.fullAddress ||
+            config.company.address ||
+            ""
+        ).trim();
+
+        const mapUrl = String(
+            identity.mapUrl ||
+            config.contact.mapUrl ||
+            (
+                address
+                    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
+                    : ""
+            )
+        ).trim();
+
+        config.identity = {
+            name,
+            legalName,
+            email,
+            phone,
+            phoneDisplay,
+            address,
+            mapUrl
+        };
+
+        config.brand.name = name;
+        config.brand.legalName = legalName;
+
+        config.company.name = name;
+        config.company.legalName = legalName;
+        config.company.address = address;
+        config.company.fullAddress = address;
+        config.company.email = email;
+        config.company.phone = phone;
+
+        config.contact.email = email;
+        config.contact.corporateEmail = email;
+        config.contact.collaborationEmail = email;
+        config.contact.formRecipientEmail = email;
+        config.contact.emailHref = email
+            ? `mailto:${email}`
+            : "";
+
+        config.contact.phone = phone;
+        config.contact.phoneDisplay = phoneDisplay;
+        config.contact.phoneHref = phone
+            ? `tel:${phone.replace(/[^\d+]/g, "")}`
+            : "";
+
+        config.contact.address = address;
+        config.contact.mapUrl = mapUrl;
+
+        config.form.recipientEmail = email;
+
+        config.footer.email = email;
+        config.footer.phone = phone;
+        config.footer.phoneDisplay = phoneDisplay;
+        config.footer.address = address;
+
+        return config;
+    }
+
     function getSiteConfig() {
         const suppliedConfig =
             window.NIMOMARK_CONFIG ||
@@ -179,7 +282,76 @@
             window.nimoMarkConfig ||
             {};
 
-        return mergeObjects(FALLBACK_CONFIG, suppliedConfig);
+        return normalizeIdentityConfig(
+            mergeObjects(
+                FALLBACK_CONFIG,
+                suppliedConfig
+            )
+        );
+    }
+
+    function getIdentity() {
+        const identity =
+            getValue(state.config, "identity", {});
+
+        const phone = String(
+            identity.phone || ""
+        ).trim();
+
+        return {
+            name: String(
+                identity.name || "NimoMark"
+            ).trim(),
+
+            legalName: String(
+                identity.legalName ||
+                identity.name ||
+                "NimoMark"
+            ).trim(),
+
+            email: String(
+                identity.email || ""
+            ).trim(),
+
+            phone,
+
+            phoneDisplay: String(
+                identity.phoneDisplay ||
+                phone
+            ).trim(),
+
+            phoneHref: phone
+                ? `tel:${phone.replace(/[^\d+]/g, "")}`
+                : "",
+
+            address: String(
+                identity.address || ""
+            ).trim(),
+
+            mapUrl: String(
+                identity.mapUrl || ""
+            ).trim()
+        };
+    }
+
+    function getBrandName() {
+        return getIdentity().name;
+    }
+
+    function getLegalCompanyName() {
+        return getIdentity().legalName;
+    }
+
+    function getContactEmail() {
+        return getIdentity().email;
+    }
+
+    function getContactPhone() {
+        return getIdentity().phone;
+    }
+
+    function getCompanyAddress() {
+        return getIdentity().address;
     }
 
     function getValue(source, path, fallbackValue = "") {
@@ -1434,6 +1606,858 @@
             });
     }
 
+    const ORIGINAL_IDENTITY = {
+        name:
+            "NimoMark",
+
+        legalName:
+            "NimoMark Career Media LLC",
+
+        email:
+            "hello@nimomark.example",
+
+        address:
+            "120 Meridian Avenue, Suite 410, Wilmington, DE 19801, United States",
+
+        shortAddress:
+            "120 Meridian Avenue, Suite 410"
+    };
+
+    let previousIdentity = {
+        ...ORIGINAL_IDENTITY,
+        phone: "",
+        phoneDisplay: ""
+    };
+
+    let identityObserver = null;
+    let identityRefreshFrame = null;
+
+
+    function escapeIdentityRegExp(value) {
+        return String(value).replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+        );
+    }
+
+
+    function replaceIdentityString(
+        value,
+        replacements
+    ) {
+        let result = String(value ?? "");
+
+        replacements.forEach(
+            ([oldValue, newValue]) => {
+                if (
+                    !oldValue ||
+                    !newValue ||
+                    oldValue === newValue
+                ) {
+                    return;
+                }
+
+                result = result.replace(
+                    new RegExp(
+                        escapeIdentityRegExp(oldValue),
+                        "g"
+                    ),
+                    newValue
+                );
+            }
+        );
+
+        return result;
+    }
+
+
+    function createIdentityReplacements(identity) {
+        const replacements = [
+            [
+                previousIdentity.legalName,
+                identity.legalName
+            ],
+            [
+                ORIGINAL_IDENTITY.legalName,
+                identity.legalName
+            ],
+
+            [
+                previousIdentity.address,
+                identity.address
+            ],
+            [
+                ORIGINAL_IDENTITY.address,
+                identity.address
+            ],
+            [
+                ORIGINAL_IDENTITY.shortAddress,
+                identity.address
+            ],
+
+            [
+                previousIdentity.email,
+                identity.email
+            ],
+            [
+                ORIGINAL_IDENTITY.email,
+                identity.email
+            ],
+
+            [
+                previousIdentity.phoneDisplay,
+                identity.phoneDisplay
+            ],
+            [
+                previousIdentity.phone,
+                identity.phoneDisplay
+            ],
+
+            [
+                previousIdentity.name,
+                identity.name
+            ],
+            [
+                ORIGINAL_IDENTITY.name,
+                identity.name
+            ]
+        ];
+
+        const unique = new Map();
+
+        replacements.forEach(
+            ([oldValue, newValue]) => {
+                if (
+                    oldValue &&
+                    newValue &&
+                    oldValue !== newValue
+                ) {
+                    unique.set(
+                        `${oldValue}|||${newValue}`,
+                        [oldValue, newValue]
+                    );
+                }
+            }
+        );
+
+        return Array
+            .from(unique.values())
+            .sort(
+                (first, second) =>
+                    second[0].length -
+                    first[0].length
+            );
+    }
+
+
+    function replaceIdentityText(
+        replacements
+    ) {
+        const walker =
+            document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode(node) {
+                        const parent =
+                            node.parentElement;
+
+                        if (!parent) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+
+                        if (
+                            parent.closest(
+                                "script, style, template, noscript"
+                            )
+                        ) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+
+        const nodes = [];
+
+        while (walker.nextNode()) {
+            nodes.push(walker.currentNode);
+        }
+
+        nodes.forEach((node) => {
+            const nextValue =
+                replaceIdentityString(
+                    node.nodeValue,
+                    replacements
+                );
+
+            if (node.nodeValue !== nextValue) {
+                node.nodeValue = nextValue;
+            }
+        });
+    }
+
+
+    function replaceIdentityAttributes(
+        replacements
+    ) {
+        const attributes = [
+            "aria-label",
+            "title",
+            "alt",
+            "placeholder",
+            "content"
+        ];
+
+        document
+            .querySelectorAll(
+                "[aria-label], [title], [alt], [placeholder], [content]"
+            )
+            .forEach((element) => {
+                attributes.forEach(
+                    (attribute) => {
+                        if (
+                            !element.hasAttribute(
+                                attribute
+                            )
+                        ) {
+                            return;
+                        }
+
+                        const currentValue =
+                            element.getAttribute(
+                                attribute
+                            );
+
+                        const nextValue =
+                            replaceIdentityString(
+                                currentValue,
+                                replacements
+                            );
+
+                        if (
+                            currentValue !==
+                            nextValue
+                        ) {
+                            element.setAttribute(
+                                attribute,
+                                nextValue
+                            );
+                        }
+                    }
+                );
+            });
+
+        document.title =
+            replaceIdentityString(
+                document.title,
+                replacements
+            );
+    }
+
+
+    function replaceLinkText(
+        link,
+        value,
+        matcher
+    ) {
+        const walker =
+            document.createTreeWalker(
+                link,
+                NodeFilter.SHOW_TEXT
+            );
+
+        while (walker.nextNode()) {
+            const node = walker.currentNode;
+
+            if (matcher(node.nodeValue)) {
+                const leading =
+                    node.nodeValue.match(/^\s*/)?.[0] ||
+                    "";
+
+                const trailing =
+                    node.nodeValue.match(/\s*$/)?.[0] ||
+                    "";
+
+                node.nodeValue =
+                    `${leading}${value}${trailing}`;
+
+                return;
+            }
+        }
+
+        if (!link.children.length) {
+            link.textContent = value;
+        }
+    }
+
+
+    function updateIdentityLinks(identity) {
+        if (identity.email) {
+            document
+                .querySelectorAll(
+                    '[data-email-link], a[href^="mailto:"]'
+                )
+                .forEach((link) => {
+                    link.setAttribute(
+                        "href",
+                        `mailto:${identity.email}`
+                    );
+
+                    replaceLinkText(
+                        link,
+                        identity.email,
+                        (text) => text.includes("@")
+                    );
+                });
+        }
+
+        if (identity.phone) {
+            document
+                .querySelectorAll(
+                    '[data-phone-link], a[href^="tel:"]'
+                )
+                .forEach((link) => {
+                    link.setAttribute(
+                        "href",
+                        identity.phoneHref
+                    );
+
+                    replaceLinkText(
+                        link,
+                        identity.phoneDisplay,
+                        (text) => /\d/.test(text)
+                    );
+                });
+        }
+
+        if (identity.mapUrl) {
+            document
+                .querySelectorAll(
+                    '[data-map-link], a[href*="google.com/maps"]'
+                )
+                .forEach((link) => {
+                    link.setAttribute(
+                        "href",
+                        identity.mapUrl
+                    );
+                });
+        }
+    }
+
+
+    function updateIdentityConfigElements(
+        identity
+    ) {
+        const values = {
+            "brand.name":
+                identity.name,
+
+            "company.name":
+                identity.name,
+
+            "company.legalName":
+                identity.legalName,
+
+            "brand.legalName":
+                identity.legalName,
+
+            "contact.email":
+                identity.email,
+
+            "contact.corporateEmail":
+                identity.email,
+
+            "contact.collaborationEmail":
+                identity.email,
+
+            "company.email":
+                identity.email,
+
+            "company.address":
+                identity.address,
+
+            "company.fullAddress":
+                identity.address,
+
+            "contact.address":
+                identity.address,
+
+            "contact.phone":
+                identity.phoneDisplay,
+
+            "contact.phoneDisplay":
+                identity.phoneDisplay
+        };
+
+        Object.entries(values).forEach(
+            ([path, value]) => {
+                if (!value) {
+                    return;
+                }
+
+                document
+                    .querySelectorAll(
+                        `[data-config="${path}"]`
+                    )
+                    .forEach((element) => {
+                        element.textContent = value;
+                    });
+            }
+        );
+    }
+
+
+    function updateGeneratedLogos(identity) {
+        document
+            .querySelectorAll(
+                [
+                    ".site-header__brand svg",
+                    ".mobile-navigation__brand svg",
+                    ".site-footer__logo svg"
+                ].join(",")
+            )
+            .forEach((svg) => {
+                const textElements =
+                    Array.from(
+                        svg.querySelectorAll("text")
+                    );
+
+                if (!textElements.length) {
+                    return;
+                }
+
+                const firstText =
+                    textElements[0];
+
+                firstText.textContent =
+                    identity.name;
+
+                firstText.setAttribute(
+                    "x",
+                    "79"
+                );
+
+                firstText.setAttribute(
+                    "font-weight",
+                    "700"
+                );
+
+                const fontSize =
+                    identity.name.length > 19
+                        ? "19"
+                        : identity.name.length > 14
+                            ? "23"
+                            : "31";
+
+                firstText.setAttribute(
+                    "font-size",
+                    fontSize
+                );
+
+                textElements
+                    .slice(1)
+                    .forEach((element) => {
+                        element.remove();
+                    });
+
+                const decorativeDot =
+                    svg.querySelector(
+                        'circle[cx="247"][cy="21"]'
+                    );
+
+                decorativeDot?.remove();
+            });
+    }
+
+
+    function createContactLink(
+        href,
+        text,
+        className
+    ) {
+        return `
+        <a
+            class="${className}"
+            href="${escapeAttribute(href)}"
+        >
+            ${escapeHtml(text)}
+        </a>
+    `;
+    }
+
+
+    function ensureIdentityBlocks(identity) {
+        const headerActions =
+            document.querySelector(
+                ".site-header__actions"
+            );
+
+        if (headerActions) {
+            let headerBlock =
+                headerActions.querySelector(
+                    "[data-auto-identity-header]"
+                );
+
+            if (!headerBlock) {
+                headerBlock =
+                    document.createElement("div");
+
+                headerBlock.setAttribute(
+                    "data-auto-identity-header",
+                    ""
+                );
+
+                headerBlock.className =
+                    "auto-identity auto-identity--header";
+
+                headerActions.prepend(
+                    headerBlock
+                );
+            }
+
+            headerBlock.innerHTML = [
+                identity.email
+                    ? createContactLink(
+                        `mailto:${identity.email}`,
+                        identity.email,
+                        "auto-identity__link"
+                    )
+                    : "",
+
+                identity.phone
+                    ? createContactLink(
+                        identity.phoneHref,
+                        identity.phoneDisplay,
+                        "auto-identity__link"
+                    )
+                    : ""
+            ].join("");
+
+            headerBlock.hidden =
+                !identity.email &&
+                !identity.phone;
+        }
+
+        const footerBrand =
+            document.querySelector(
+                ".site-footer__brand"
+            );
+
+        if (footerBrand) {
+            let footerBlock =
+                footerBrand.querySelector(
+                    "[data-auto-identity-footer]"
+                );
+
+            if (!footerBlock) {
+                footerBlock =
+                    document.createElement("div");
+
+                footerBlock.setAttribute(
+                    "data-auto-identity-footer",
+                    ""
+                );
+
+                footerBlock.className =
+                    "auto-identity auto-identity--footer";
+
+                footerBrand.append(
+                    footerBlock
+                );
+            }
+
+            footerBlock.innerHTML = `
+            <strong class="auto-identity__legal-name">
+                ${escapeHtml(identity.legalName)}
+            </strong>
+
+            ${identity.email
+                    ? createContactLink(
+                        `mailto:${identity.email}`,
+                        identity.email,
+                        "auto-identity__link"
+                    )
+                    : ""
+                }
+
+            ${identity.phone
+                    ? createContactLink(
+                        identity.phoneHref,
+                        identity.phoneDisplay,
+                        "auto-identity__link"
+                    )
+                    : ""
+                }
+
+            ${identity.address
+                    ? identity.mapUrl
+                        ? createContactLink(
+                            identity.mapUrl,
+                            identity.address,
+                            "auto-identity__link auto-identity__address"
+                        )
+                        : `
+                            <span class="auto-identity__address">
+                                ${escapeHtml(identity.address)}
+                            </span>
+                        `
+                    : ""
+                }
+        `;
+        }
+
+        const mobileContact =
+            document.querySelector(
+                ".mobile-navigation__contact"
+            );
+
+        if (mobileContact) {
+            let mobileBlock =
+                mobileContact.querySelector(
+                    "[data-auto-identity-mobile]"
+                );
+
+            if (!mobileBlock) {
+                mobileBlock =
+                    document.createElement("div");
+
+                mobileBlock.setAttribute(
+                    "data-auto-identity-mobile",
+                    ""
+                );
+
+                mobileBlock.className =
+                    "auto-identity auto-identity--mobile";
+
+                mobileContact.append(
+                    mobileBlock
+                );
+            }
+
+            mobileBlock.innerHTML = `
+            ${identity.phone
+                    ? createContactLink(
+                        identity.phoneHref,
+                        identity.phoneDisplay,
+                        "auto-identity__link"
+                    )
+                    : ""
+                }
+
+            ${identity.address
+                    ? `<span class="auto-identity__address">${escapeHtml(identity.address)}</span>`
+                    : ""
+                }
+        `;
+        }
+    }
+
+
+    function ensureIdentityStyles() {
+        if (
+            document.getElementById(
+                "auto-identity-styles"
+            )
+        ) {
+            return;
+        }
+
+        const style =
+            document.createElement("style");
+
+        style.id =
+            "auto-identity-styles";
+
+        style.textContent = `
+        .auto-identity {
+            display: flex;
+            gap: 0.65rem;
+        }
+
+        .auto-identity--header {
+            align-items: center;
+        }
+
+        .auto-identity--header .auto-identity__link {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.72rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .auto-identity--footer,
+        .auto-identity--mobile {
+            display: grid;
+            gap: 0.45rem;
+            margin-top: 1rem;
+        }
+
+        .auto-identity__legal-name {
+            color: #ffffff;
+            font-size: 0.82rem;
+        }
+
+        .auto-identity__link,
+        .auto-identity__address {
+            width: fit-content;
+            max-width: 38ch;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 0.78rem;
+            line-height: 1.55;
+            overflow-wrap: anywhere;
+        }
+
+        .auto-identity__link:hover,
+        .auto-identity__link:focus-visible {
+            color: var(--color-blue, #55c7ff);
+        }
+
+        @media (max-width: 1280px) {
+            .auto-identity--header {
+                display: none;
+            }
+        }
+    `;
+
+        document.head.append(style);
+    }
+
+
+    function replaceIdentitySchema(
+        replacements
+    ) {
+        document
+            .querySelectorAll(
+                'script[type="application/ld+json"]'
+            )
+            .forEach((script) => {
+                const nextValue =
+                    replaceIdentityString(
+                        script.textContent,
+                        replacements
+                    );
+
+                if (
+                    script.textContent !==
+                    nextValue
+                ) {
+                    script.textContent =
+                        nextValue;
+                }
+            });
+    }
+
+
+    function applyGlobalIdentity() {
+        const identity =
+            getIdentity();
+
+        const replacements =
+            createIdentityReplacements(
+                identity
+            );
+
+        identityObserver?.disconnect();
+
+        replaceIdentityText(
+            replacements
+        );
+
+        replaceIdentityAttributes(
+            replacements
+        );
+
+        updateIdentityConfigElements(
+            identity
+        );
+
+        updateIdentityLinks(
+            identity
+        );
+
+        updateGeneratedLogos(
+            identity
+        );
+
+        ensureIdentityStyles();
+
+        ensureIdentityBlocks(
+            identity
+        );
+
+        replaceIdentitySchema(
+            replacements
+        );
+
+        previousIdentity = {
+            ...identity
+        };
+
+        if (
+            identityObserver &&
+            document.body
+        ) {
+            identityObserver.observe(
+                document.body,
+                {
+                    childList: true,
+                    subtree: true
+                }
+            );
+        }
+    }
+
+
+    function scheduleIdentityRefresh() {
+        if (identityRefreshFrame) {
+            return;
+        }
+
+        identityRefreshFrame =
+            window.requestAnimationFrame(() => {
+                identityRefreshFrame = null;
+                applyGlobalIdentity();
+            });
+    }
+
+
+    function initializeIdentitySystem() {
+        applyGlobalIdentity();
+
+        identityObserver =
+            new MutationObserver(
+                (mutations) => {
+                    const contentAdded =
+                        mutations.some(
+                            (mutation) =>
+                                mutation.addedNodes.length
+                        );
+
+                    if (contentAdded) {
+                        scheduleIdentityRefresh();
+                    }
+                }
+            );
+
+        identityObserver.observe(
+            document.body,
+            {
+                childList: true,
+                subtree: true
+            }
+        );
+
+        window.NimoMarkIdentity = {
+            get:
+                getIdentity,
+
+            refresh:
+                applyGlobalIdentity
+        };
+    }
+
     function updateHeaderState() {
         state.scrollTicking = false;
 
@@ -2406,6 +3430,7 @@
         renderCookieBanner();
 
         applyConfigBindings();
+        initializeIdentitySystem();
         initializeStickyHeader();
         initializeDesktopDropdown();
         initializeMobileNavigation();

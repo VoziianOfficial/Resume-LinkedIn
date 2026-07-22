@@ -1,4 +1,27 @@
 window.NIMOMARK_CONFIG = {
+
+    identity: {
+        name: "NimoMark",
+
+        legalName:
+            "NimoMark Career Media LLC",
+
+        email:
+            "hello@nimomark.example",
+
+        phone:
+            "",
+
+        phoneDisplay:
+            "",
+
+        address:
+            "120 Meridian Avenue, Suite 410, Wilmington, DE 19801, United States",
+
+        mapUrl:
+            "https://www.google.com/maps/search/?api=1&query=120%20Meridian%20Avenue%20Suite%20410%20Wilmington%20DE%2019801"
+    },
+    
     "brand": {
         "name": "NimoMark",
         "legalName": "NimoMark Career Media LLC",
