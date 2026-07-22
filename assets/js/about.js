@@ -10,6 +10,11 @@
         processTrack: "[data-about-process-track]",
         qualityPrinciples: "[data-about-quality-principles]",
         partnershipTags: "[data-about-partnership-tags]",
+        testimonialsSlider: "[data-about-testimonials-slider]",
+        testimonialsPrevious: "[data-about-testimonials-prev]",
+        testimonialsNext: "[data-about-testimonials-next]",
+        testimonialsPagination:
+            "[data-about-testimonials-pagination]",
         parallaxMedia: "[data-about-parallax]",
         revealGroup: "[data-about-reveal-group]",
         revealItem: "[data-about-reveal-item]"
@@ -265,6 +270,7 @@
     const state = {
         initialized: false,
         revealObserver: null,
+        testimonialsSlider: null,
         parallaxFrame: null,
         parallaxElements: [],
         reducedMotion: false
@@ -1241,6 +1247,48 @@
         );
     }
 
+    function initializeTestimonialsSlider() {
+        const slider = document.querySelector(
+            SELECTORS.testimonialsSlider
+        );
+
+        if (!slider) {
+            return;
+        }
+
+        if (
+            !window.Swiper ||
+            typeof window.Swiper !== "function"
+        ) {
+            slider.classList.add("swiper-unavailable");
+            return;
+        }
+
+        state.testimonialsSlider = new window.Swiper(slider, {
+            slidesPerView: 1,
+            spaceBetween: 28,
+            speed: state.reducedMotion ? 0 : 650,
+            loop: true,
+            grabCursor: true,
+            keyboard: {
+                enabled: true
+            },
+            navigation: {
+                prevEl: SELECTORS.testimonialsPrevious,
+                nextEl: SELECTORS.testimonialsNext
+            },
+            pagination: {
+                el: SELECTORS.testimonialsPagination,
+                clickable: true
+            },
+            a11y: {
+                enabled: true,
+                prevSlideMessage: "Previous feedback",
+                nextSlideMessage: "Next feedback"
+            }
+        });
+    }
+
     function injectAboutSchema() {
         const existingSchema = document.getElementById(
             "nimomark-about-schema"
@@ -1334,6 +1382,7 @@
 
         initializeRevealGroups();
         initializeParallax();
+        initializeTestimonialsSlider();
         injectAboutSchema();
 
         refreshIcons();
