@@ -2528,3 +2528,326 @@
         height: 48px;
     }
 }
+
+.about-service-mosaic {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-white);
+}
+
+.about-service-mosaic__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 1.7vw, 1.5rem);
+}
+
+.about-service-mosaic__card {
+    --mosaic-background: var(--color-surface);
+    --mosaic-text: var(--color-ink);
+    --mosaic-muted: var(--color-text-muted);
+    --mosaic-icon: rgba(16, 16, 18, 0.3);
+    --mosaic-border: rgba(16, 16, 18, 0.07);
+    --mosaic-arrow-background: var(--color-ink);
+    --mosaic-arrow-color: var(--color-white);
+
+    position: relative;
+    min-width: 0;
+    min-height: clamp(300px, 24vw, 360px);
+    overflow: hidden;
+    border: 1px solid var(--mosaic-border);
+    border-radius: clamp(1.5rem, 2.6vw, 2.25rem);
+    color: var(--mosaic-text);
+    background: var(--mosaic-background);
+    transition:
+        border-color var(--transition-base),
+        box-shadow var(--transition-base),
+        transform var(--transition-base);
+}
+
+.about-service-mosaic__card--light {
+    --mosaic-background:
+        linear-gradient(145deg,
+            #f9fafc 0%,
+            #eff5fb 100%);
+}
+
+.about-service-mosaic__card--dark {
+    --mosaic-background: var(--color-ink);
+    --mosaic-text: var(--color-white);
+    --mosaic-muted: rgba(255, 255, 255, 0.66);
+    --mosaic-icon: rgba(85, 199, 255, 0.32);
+    --mosaic-border: rgba(255, 255, 255, 0.08);
+    --mosaic-arrow-background: transparent;
+    --mosaic-arrow-color: var(--color-white);
+}
+
+.about-service-mosaic__card--blue {
+    --mosaic-background:
+        linear-gradient(135deg,
+            #101012 0%,
+            #172c3a 58%,
+            rgba(85, 199, 255, 0.58) 145%);
+    --mosaic-text: var(--color-white);
+    --mosaic-muted: rgba(255, 255, 255, 0.68);
+    --mosaic-icon: rgba(255, 255, 255, 0.3);
+    --mosaic-border: rgba(255, 255, 255, 0.08);
+    --mosaic-arrow-background: transparent;
+    --mosaic-arrow-color: var(--color-white);
+}
+
+.about-service-mosaic__card--graphite {
+    --mosaic-background:
+        linear-gradient(135deg,
+            #252529 0%,
+            #101012 64%,
+            #303744 100%);
+    --mosaic-text: var(--color-white);
+    --mosaic-muted: rgba(255, 255, 255, 0.66);
+    --mosaic-icon: rgba(255, 173, 91, 0.3);
+    --mosaic-border: rgba(255, 255, 255, 0.08);
+    --mosaic-arrow-background: transparent;
+    --mosaic-arrow-color: var(--color-white);
+}
+
+.about-service-mosaic__card--neutral {
+    --mosaic-background: #f7f6f3;
+    --mosaic-icon: rgba(16, 16, 18, 0.2);
+}
+
+.about-service-mosaic__card--warm {
+    --mosaic-background:
+        linear-gradient(145deg,
+            rgba(255, 173, 91, 0.2) 0%,
+            rgba(255, 77, 28, 0.08) 100%);
+    --mosaic-border: rgba(255, 77, 28, 0.12);
+    --mosaic-icon: rgba(255, 77, 28, 0.3);
+}
+
+.about-service-mosaic__link {
+    position: relative;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    grid-template-rows: 1fr auto;
+    padding: clamp(1.5rem, 2.5vw, 2.25rem);
+    color: inherit;
+    isolation: isolate;
+}
+
+.about-service-mosaic__link::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+        radial-gradient(circle at 100% 100%,
+            rgba(85, 199, 255, 0.13),
+            transparent 38%);
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+    content: "";
+}
+
+.about-service-mosaic__content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+    padding-right: clamp(1rem, 4vw, 4rem);
+}
+
+.about-service-mosaic__number {
+    width: fit-content;
+    color: var(--color-orange-deep);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    line-height: 1;
+}
+
+.about-service-mosaic__card--dark .about-service-mosaic__number,
+.about-service-mosaic__card--blue .about-service-mosaic__number,
+.about-service-mosaic__card--graphite .about-service-mosaic__number {
+    color: var(--color-blue);
+}
+
+.about-service-mosaic__title {
+    max-width: 17ch;
+    margin: 0;
+    color: var(--mosaic-text);
+    font-size: clamp(1.35rem, 1.9vw, 1.85rem);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+}
+
+.about-service-mosaic__text {
+    max-width: 37ch;
+    margin: 0;
+    color: var(--mosaic-muted);
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    line-height: 1.72;
+}
+
+.about-service-mosaic__arrow {
+    position: absolute;
+    z-index: 3;
+    bottom: clamp(1.4rem, 2.5vw, 2.1rem);
+    left: clamp(1.5rem, 2.5vw, 2.25rem);
+    display: inline-flex;
+    width: 54px;
+    height: 54px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(16, 16, 18, 0.14);
+    border-radius: 50%;
+    color: var(--mosaic-arrow-color);
+    background: var(--mosaic-arrow-background);
+    transition:
+        color var(--transition-base),
+        border-color var(--transition-base),
+        background-color var(--transition-base),
+        transform var(--transition-base);
+}
+
+.about-service-mosaic__card--dark .about-service-mosaic__arrow,
+.about-service-mosaic__card--blue .about-service-mosaic__arrow,
+.about-service-mosaic__card--graphite .about-service-mosaic__arrow {
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.about-service-mosaic__arrow svg {
+    width: 1.05rem;
+    height: 1.05rem;
+}
+
+.about-service-mosaic__icon {
+    position: absolute;
+    z-index: 1;
+    right: clamp(1.4rem, 2.5vw, 2.2rem);
+    bottom: clamp(1.2rem, 2.2vw, 1.9rem);
+    display: inline-flex;
+    width: clamp(76px, 7vw, 108px);
+    height: clamp(76px, 7vw, 108px);
+    align-items: center;
+    justify-content: center;
+    color: var(--mosaic-icon);
+    transition:
+        color var(--transition-base),
+        opacity var(--transition-base),
+        transform var(--transition-slow);
+}
+
+.about-service-mosaic__icon svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 1.05;
+}
+
+.about-service-mosaic__card:hover,
+.about-service-mosaic__card:focus-within {
+    border-color: rgba(85, 199, 255, 0.28);
+    box-shadow: 0 24px 55px rgba(16, 16, 18, 0.12);
+    transform: translateY(-7px);
+}
+
+.about-service-mosaic__card:hover .about-service-mosaic__link::before,
+.about-service-mosaic__card:focus-within .about-service-mosaic__link::before {
+    opacity: 1;
+}
+
+.about-service-mosaic__card:hover .about-service-mosaic__icon,
+.about-service-mosaic__card:focus-within .about-service-mosaic__icon {
+    color: var(--color-blue);
+    transform: translate(-0.25rem, -0.25rem) scale(1.06);
+}
+
+.about-service-mosaic__card:hover .about-service-mosaic__arrow,
+.about-service-mosaic__card:focus-within .about-service-mosaic__arrow {
+    color: var(--color-ink);
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    transform: translate(0.15rem, -0.15rem);
+}
+
+.about-service-mosaic__link:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: -5px;
+    border-radius: inherit;
+}
+
+@media (max-width: 1100px) {
+    .about-service-mosaic__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-service-mosaic__card {
+        min-height: 330px;
+    }
+}
+
+@media (max-width: 680px) {
+    .about-service-mosaic__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-service-mosaic__card {
+        min-height: 310px;
+    }
+
+    .about-service-mosaic__content {
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-service-mosaic__link {
+        padding: 1.35rem;
+    }
+
+    .about-service-mosaic__title {
+        max-width: 15ch;
+        font-size: 1.4rem;
+    }
+
+    .about-service-mosaic__text {
+        max-width: 30ch;
+        font-size: 0.88rem;
+    }
+
+    .about-service-mosaic__arrow {
+        bottom: 1.35rem;
+        left: 1.35rem;
+        width: 48px;
+        height: 48px;
+    }
+
+    .about-service-mosaic__icon {
+        right: 1.2rem;
+        bottom: 1.2rem;
+        width: 78px;
+        height: 78px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .about-service-mosaic__card,
+    .about-service-mosaic__link::before,
+    .about-service-mosaic__arrow,
+    .about-service-mosaic__icon {
+        transition: none;
+        transform: none;
+    }
+}
+
+.about-service-mosaic {
+    padding-top: clamp(2.5rem, 4vw, 4rem);
+}
+
+@media (max-width: 768px) {
+    .about-service-mosaic {
+        padding-top: clamp(2rem, 6vw, 3rem);
+    }
+}
