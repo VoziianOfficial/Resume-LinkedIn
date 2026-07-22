@@ -2558,32 +2558,169 @@ h2 {
     -webkit-backdrop-filter: blur(18px);
 }
 
+
+
+:root {
+    --sticky-offset: calc(var(--header-height-scrolled) + 2rem);
+}
+
+
+
 html {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip !important;
 }
 
 body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: visible !important;
 }
 
 body.is-scroll-locked {
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 main,
-section,
 [data-site-header],
 [data-site-footer] {
+    width: 100%;
     max-width: 100%;
+    min-width: 0;
 }
 
 .container,
 .container-wide,
 .container-narrow {
-    min-width: 0;
     max-width: 100%;
+    min-width: 0;
+}
+
+
+
+:is(.home-purpose,
+    .home-audience,
+    .home-resume-clarity,
+    .home-faq,
+    .about-platform,
+    .about-quality,
+    .contact-introduction,
+    .contact-form-section,
+    .contact-faq,
+    .examples-introduction,
+    .examples-it-anatomy,
+    .examples-executive,
+    .examples-checklist,
+    .service-detail,
+    .service-faq-cta,
+    .legal-page) {
+    position: relative;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+    contain: none !important;
+}
+
+
+
+:is(.home-purpose__layout,
+    .home-audience__layout,
+    .home-resume-clarity__layout,
+    .home-faq__layout,
+    .about-platform__layout,
+    .about-quality__layout,
+    .contact-introduction__layout,
+    .contact-form-section__layout,
+    .contact-faq__layout,
+    .examples-introduction__layout,
+    .examples-it-anatomy__layout,
+    .examples-executive__layout,
+    .examples-checklist__layout,
+    .service-detail__layout,
+    .service-faq-cta__layout,
+    .legal-page__layout) {
+    align-items: start !important;
+    min-width: 0;
+    overflow: visible !important;
+    transform: none !important;
+    contain: none !important;
+}
+
+
+:is(.home-purpose__content,
+    .home-audience__intro,
+    .home-resume-clarity__intro,
+    .home-faq__intro,
+    .about-platform__intro,
+    .about-quality__intro,
+    .contact-introduction__content,
+    .contact-form-section__intro,
+    .contact-faq__intro,
+    .examples-introduction__heading,
+    .examples-it-anatomy__intro,
+    .examples-executive__intro,
+    .examples-checklist__intro,
+    .service-detail__aside-inner,
+    .service-faq-cta__intro,
+    .legal-page__aside-inner) {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    z-index: 2;
+    top: var(--sticky-offset) !important;
+    align-self: start !important;
+    height: max-content;
+    min-width: 0;
+    transform: none !important;
+    filter: none !important;
+    perspective: none !important;
+    contain: none !important;
+}
+
+
+
+:is(.home-purpose__content,
+    .home-audience__intro,
+    .home-resume-clarity__intro,
+    .home-faq__intro,
+    .about-platform__intro,
+    .about-quality__intro,
+    .contact-introduction__content,
+    .contact-form-section__intro,
+    .contact-faq__intro,
+    .examples-introduction__heading,
+    .examples-it-anatomy__intro,
+    .examples-executive__intro,
+    .examples-checklist__intro,
+    .service-detail__aside-inner,
+    .service-faq-cta__intro,
+    .legal-page__aside-inner)[data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+
+
+@media (max-width: 1024px) {
+
+    :is(.home-purpose__content,
+        .home-audience__intro,
+        .home-resume-clarity__intro,
+        .home-faq__intro,
+        .about-platform__intro,
+        .about-quality__intro,
+        .contact-introduction__content,
+        .contact-form-section__intro,
+        .contact-faq__intro,
+        .examples-introduction__heading,
+        .examples-it-anatomy__intro,
+        .examples-executive__intro,
+        .examples-checklist__intro,
+        .service-detail__aside-inner,
+        .service-faq-cta__intro,
+        .legal-page__aside-inner) {
+        position: static !important;
+        top: auto !important;
+        height: auto;
+    }
 }
