@@ -3065,3 +3065,288 @@
         transform: none;
     }
 }
+
+.home-why--image-cards {
+    position: relative;
+    overflow: hidden;
+    color: var(--color-white);
+    background: var(--color-ink);
+}
+
+.home-why__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.home-why__background picture,
+.home-why__background img {
+    width: 100%;
+    height: 100%;
+}
+
+.home-why__background img {
+    object-fit: cover;
+    filter: saturate(0.78) contrast(1.02);
+}
+
+.home-why__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(180deg,
+            rgba(6, 18, 39, 0.78) 0%,
+            rgba(6, 18, 39, 0.84) 34%,
+            rgba(6, 18, 39, 0.82) 100%),
+        linear-gradient(90deg,
+            rgba(8, 116, 209, 0.09) 0%,
+            rgba(255, 122, 0, 0.05) 100%);
+}
+
+.home-why__container {
+    position: relative;
+    z-index: 2;
+}
+
+.home-why__heading {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+    text-align: center;
+}
+
+.home-why__heading .site-eyebrow {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-blue);
+}
+
+.home-why__heading .site-eyebrow::before,
+.home-why__heading .site-eyebrow::after {
+    display: inline-block;
+    width: 54px;
+    height: 1px;
+    background: rgba(255, 122, 0, 0.72);
+    content: "";
+}
+
+.home-why__title {
+    max-width: 11ch;
+    color: var(--color-white);
+    font-size: clamp(2.7rem, 5vw, 5.4rem);
+    font-weight: 650;
+    letter-spacing: -0.05em;
+    line-height: 1.02;
+}
+
+.home-why__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+    align-items: stretch;
+    padding-top: 1.8rem;
+}
+
+.home-why__card {
+    position: relative;
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    min-height: 310px;
+    padding:
+        clamp(4.6rem, 6vw, 5.2rem) clamp(1.4rem, 2.5vw, 2.3rem) clamp(2rem, 3vw, 2.6rem);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2rem;
+    background: rgba(8, 116, 209, 0.24);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    text-align: center;
+    transition:
+        transform var(--transition-base),
+        background-color var(--transition-base),
+        border-color var(--transition-base),
+        box-shadow var(--transition-base);
+}
+
+.home-why__card:hover,
+.home-why__card:focus-within {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(8, 116, 209, 0.3);
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.22),
+        0 0 0 1px rgba(255, 122, 0, 0.08);
+}
+
+.home-why__icon {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    display: inline-flex;
+    width: 108px;
+    height: 108px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--color-white);
+    background: linear-gradient(180deg,
+            rgba(44, 155, 255, 1) 0%,
+            rgba(8, 116, 209, 1) 100%);
+    box-shadow:
+        0 18px 38px rgba(8, 116, 209, 0.24),
+        0 0 0 10px rgba(255, 255, 255, 0.02);
+    transform: translateX(-50%);
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        background var(--transition-base);
+}
+
+.home-why__card:hover .home-why__icon,
+.home-why__card:focus-within .home-why__icon {
+    transform: translateX(-50%) translateY(-4px);
+    box-shadow:
+        0 24px 44px rgba(8, 116, 209, 0.32),
+        0 0 0 10px rgba(255, 255, 255, 0.025);
+}
+
+.home-why__icon svg {
+    width: 48px;
+    height: 48px;
+    stroke-width: 1.45;
+}
+
+.home-why__card-title {
+    margin: 0 0 1rem;
+    color: var(--color-white);
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.18;
+}
+
+.home-why__card-text {
+    max-width: 30ch;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+@media (max-width: 1180px) {
+    .home-why__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-why__card:last-child {
+        grid-column: 1 / -1;
+        max-width: 620px;
+        justify-self: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-why__title {
+        max-width: 100%;
+        font-size: clamp(2.3rem, 8vw, 4rem);
+    }
+
+    .home-why__grid {
+        grid-template-columns: 1fr;
+        gap: 3.25rem;
+    }
+
+    .home-why__card:last-child {
+        grid-column: auto;
+        max-width: none;
+    }
+
+    .home-why__card {
+        min-height: 0;
+        padding:
+            4.2rem 1.25rem 1.8rem;
+        border-radius: 1.5rem;
+    }
+
+    .home-why__icon {
+        width: 92px;
+        height: 92px;
+        top: -26px;
+    }
+
+    .home-why__icon svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .home-why__heading .site-eyebrow::before,
+    .home-why__heading .site-eyebrow::after {
+        width: 28px;
+    }
+
+    .home-why__card-title {
+        font-size: 1.45rem;
+    }
+
+    .home-why__card-text {
+        font-size: 0.94rem;
+        line-height: 1.75;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .home-why__card,
+    .home-why__icon {
+        transition: none;
+        transform: none;
+    }
+}
+
+.home-why__heading {
+    display: grid;
+    width: 100%;
+    max-width: 1180px;
+    justify-items: center;
+    gap: 1rem;
+    margin: 0 auto clamp(3rem, 5vw, 5rem);
+    text-align: center;
+}
+
+.home-why__title {
+    width: 100%;
+    max-width: 18ch;
+    color: var(--color-white);
+    font-size: clamp(2.7rem, 5vw, 5.4rem);
+    font-weight: 650;
+    letter-spacing: -0.05em;
+    line-height: 1.02;
+}
+
+@media (max-width: 768px) {
+    .home-why__heading {
+        max-width: 720px;
+    }
+
+    .home-why__title {
+        max-width: 16ch;
+        font-size: clamp(2.3rem, 8vw, 4rem);
+    }
+}
+
+@media (max-width: 560px) {
+    .home-why__title {
+        max-width: 100%;
+    }
+}
