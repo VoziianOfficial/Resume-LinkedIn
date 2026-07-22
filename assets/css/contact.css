@@ -1249,6 +1249,7 @@
     position: relative;
     overflow: hidden;
     padding-top: clamp(3.5rem, 5vw, 5.5rem);
+    padding-bottom: 0;
     background: var(--color-white);
 }
 
@@ -1515,6 +1516,7 @@
 @media (max-width: 768px) {
     .contact-inquiry-paths {
         padding-top: clamp(2.5rem, 7vw, 3.5rem);
+        padding-bottom: 0;
     }
 
     .contact-inquiry-paths__heading {
