@@ -3686,3 +3686,39 @@
         transform: none;
     }
 }
+
+
+.home-purpose::before,
+.home-purpose::after {
+    display: none;
+}
+
+
+.home-purpose__note,
+.home-purpose__floating-card,
+.home-benefits-split__note {
+    right: 0;
+}
+
+.home-guidance-intro__dots {
+    right: 0;
+}
+
+
+.home-purpose__layout,
+.home-benefits-split__layout,
+.home-guidance-intro__layout,
+.home-featured-services__grid,
+.home-service-showcase__grid,
+.home-why__grid {
+    min-width: 0;
+}
+
+.home-purpose__content,
+.home-purpose__visual,
+.home-benefits-split__content,
+.home-benefits-split__visual,
+.home-guidance-intro__content,
+.home-guidance-intro__visual {
+    min-width: 0;
+}

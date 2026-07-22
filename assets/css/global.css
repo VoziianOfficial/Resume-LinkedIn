@@ -685,20 +685,7 @@ h4 {
     white-space: nowrap;
 }
 
-.site-header {
-    position: sticky;
-    z-index: 1000;
-    top: 0;
-    width: 100%;
-    height: var(--header-height);
-    color: var(--color-white);
-    background: transparent;
-    transition:
-        height var(--transition-base),
-        background-color var(--transition-base),
-        box-shadow var(--transition-base),
-        backdrop-filter var(--transition-base);
-}
+
 
 .site-header::after {
     position: absolute;
@@ -2532,4 +2519,71 @@ h2 {
 
 .internal-hero__title {
     max-width: min(100%, 1120px);
+}
+
+
+[data-site-header] {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    height: var(--header-height);
+}
+
+/* Надёжная фиксация независимо от JS-mount */
+.site-header {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100vw;
+    height: var(--header-height);
+    color: var(--color-white);
+    background: transparent;
+    transform: none;
+    transition:
+        height var(--transition-base),
+        background-color var(--transition-base),
+        box-shadow var(--transition-base),
+        backdrop-filter var(--transition-base);
+}
+
+.site-header.is-scrolled,
+.site-header.is-menu-open {
+    height: var(--header-height-scrolled);
+    background: rgba(8, 8, 10, 0.94);
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body.is-scroll-locked {
+    overflow: hidden;
+}
+
+main,
+section,
+[data-site-header],
+[data-site-footer] {
+    max-width: 100%;
+}
+
+.container,
+.container-wide,
+.container-narrow {
+    min-width: 0;
+    max-width: 100%;
 }
