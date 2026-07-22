@@ -1901,10 +1901,6 @@
     }
 
     function initializeAccordion(accordion) {
-        if (accordion.dataset.accordionInitialized === "true") {
-            return;
-        }
-
         accordion.dataset.accordionInitialized = "true";
 
         const allowMultiple =
@@ -1950,13 +1946,19 @@
                 initiallyExpanded
             );
 
+            if (trigger.dataset.accordionTriggerInitialized === "true") {
+                return;
+            }
+
+            trigger.dataset.accordionTriggerInitialized = "true";
+
             trigger.addEventListener("click", () => {
                 const currentlyExpanded =
                     trigger.getAttribute("aria-expanded") ===
                     "true";
 
                 if (!allowMultiple && !currentlyExpanded) {
-                    items.forEach((otherItem) => {
+                    getAccordionItems(accordion).forEach((otherItem) => {
                         if (otherItem === item) {
                             return;
                         }
@@ -1989,7 +1991,7 @@
             });
 
             trigger.addEventListener("keydown", (event) => {
-                const triggers = items
+                const triggers = getAccordionItems(accordion)
                     .map((accordionItem) =>
                         accordionItem.querySelector(
                             SELECTORS.accordionTrigger
