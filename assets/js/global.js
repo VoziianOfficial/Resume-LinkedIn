@@ -3317,50 +3317,446 @@
         }
     }
 
-    function initializeAos() {
-        const reducedMotion = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
+    /* =========================================================
+       PREMIUM GLOBAL AOS
+       ========================================================= */
 
-        if (reducedMotion) {
-            documentElement.classList.add("aos-disabled");
-            return;
+    let premiumAosInitialized = false;
+    let premiumAosRefreshTimer = null;
+    let premiumAosObserver = null;
+
+    const AOS_EXCLUDED_SELECTOR = [
+        ".service-detail__aside-inner",
+        ".legal-page__aside-inner",
+
+        ".home-purpose__content",
+        ".home-audience__intro",
+        ".home-resume-clarity__intro",
+        ".home-faq__intro",
+
+        ".about-platform__intro",
+        ".about-quality__intro",
+
+        ".contact-introduction__content",
+        ".contact-form-section__intro",
+        ".contact-faq__intro",
+
+        ".examples-introduction__heading",
+        ".examples-it-anatomy__intro",
+        ".examples-executive__intro",
+        ".examples-checklist__intro",
+
+        ".service-faq-cta__intro",
+
+        "[data-service-parallax]",
+        "[data-home-parallax]",
+        "[data-about-parallax]",
+        "[data-services-parallax]",
+
+        ".swiper",
+        ".swiper-wrapper"
+    ].join(",");
+
+
+    function removeAosFromElement(element) {
+        element.removeAttribute("data-aos");
+        element.removeAttribute("data-aos-delay");
+        element.removeAttribute("data-aos-duration");
+        element.removeAttribute("data-aos-easing");
+        element.removeAttribute("data-aos-premium");
+
+        element.classList.remove(
+            "aos-init",
+            "aos-animate"
+        );
+    }
+
+
+    function isAosExcluded(element) {
+        if (
+            element.matches(AOS_EXCLUDED_SELECTOR) ||
+            element.closest(
+                ".swiper-wrapper, [data-aos-disabled]"
+            )
+        ) {
+            return true;
+        }
+
+        return (
+            window.getComputedStyle(element).position ===
+            "sticky"
+        );
+    }
+
+
+    function getPremiumAosCategory(element) {
+        const className =
+            typeof element.className === "string"
+                ? element.className
+                : "";
+
+        if (
+            element.closest(
+                ".home-hero, .internal-hero"
+            )
+        ) {
+            return "hero";
         }
 
         if (
+            element.matches("article") ||
+            /(card|entry|item|tile|panel)/i.test(
+                className
+            )
+        ) {
+            return "card";
+        }
+
+        if (
+            element.querySelector(
+                ":scope > picture, :scope > img"
+            ) ||
+            /(visual|media|image|photo|picture)/i.test(
+                className
+            )
+        ) {
+            return "media";
+        }
+
+        return "text";
+    }
+
+
+    function getPremiumAosName(
+        originalAnimation,
+        category
+    ) {
+        const animation = String(
+            originalAnimation || ""
+        ).toLowerCase();
+
+        if (category === "hero") {
+            return "premium-hero";
+        }
+
+        if (category === "card") {
+            return "premium-card";
+        }
+
+        if (category === "media") {
+            if (animation.includes("left")) {
+                return "premium-media-left";
+            }
+
+            if (animation.includes("right")) {
+                return "premium-media-right";
+            }
+
+            return "premium-media";
+        }
+
+        if (animation.includes("left")) {
+            return "premium-left";
+        }
+
+        if (animation.includes("right")) {
+            return "premium-right";
+        }
+
+        if (animation.includes("down")) {
+            return "premium-down";
+        }
+
+        if (animation.includes("zoom")) {
+            return "premium-zoom";
+        }
+
+        return "premium-up";
+    }
+
+
+    function autoAddPremiumAos(scope = document) {
+        const root =
+            scope &&
+                typeof scope.querySelectorAll === "function"
+                ? scope
+                : document;
+
+        root
+            .querySelectorAll("main .site-section")
+            .forEach((section) => {
+                const heading =
+                    section.querySelector("h2");
+
+                if (
+                    heading &&
+                    !heading.hasAttribute("data-aos") &&
+                    !isAosExcluded(heading)
+                ) {
+                    heading.setAttribute(
+                        "data-aos",
+                        "fade-up"
+                    );
+                }
+
+                const visual =
+                    section.querySelector(
+                        [
+                            '[class*="__visual"]',
+                            '[class*="__media"]'
+                        ].join(",")
+                    );
+
+                if (
+                    visual &&
+                    !visual.hasAttribute("data-aos") &&
+                    !isAosExcluded(visual)
+                ) {
+                    visual.setAttribute(
+                        "data-aos",
+                        "fade-left"
+                    );
+                }
+
+                section
+                    .querySelectorAll("article")
+                    .forEach((article, index) => {
+                        if (
+                            article.hasAttribute(
+                                "data-aos"
+                            ) ||
+                            isAosExcluded(article)
+                        ) {
+                            return;
+                        }
+
+                        article.setAttribute(
+                            "data-aos",
+                            "fade-up"
+                        );
+
+                        article.setAttribute(
+                            "data-aos-delay",
+                            String(
+                                Math.min(index * 55, 165)
+                            )
+                        );
+                    });
+            });
+    }
+
+
+    function preparePremiumAos(scope = document) {
+        const root =
+            scope &&
+                typeof scope.querySelectorAll === "function"
+                ? scope
+                : document;
+
+        autoAddPremiumAos(root);
+
+        root
+            .querySelectorAll("[data-aos]")
+            .forEach((element) => {
+                if (isAosExcluded(element)) {
+                    removeAosFromElement(element);
+                    return;
+                }
+
+                const originalAnimation =
+                    element.dataset.aosOriginal ||
+                    element.dataset.aos ||
+                    "fade-up";
+
+                const category =
+                    getPremiumAosCategory(element);
+
+                element.dataset.aosOriginal =
+                    originalAnimation;
+
+                element.dataset.aosPremium =
+                    category;
+
+                element.dataset.aos =
+                    getPremiumAosName(
+                        originalAnimation,
+                        category
+                    );
+
+                const currentDelay =
+                    Number.parseInt(
+                        element.dataset.aosDelay || "0",
+                        10
+                    ) || 0;
+
+                element.dataset.aosDelay = String(
+                    Math.min(currentDelay, 200)
+                );
+
+                const durations = {
+                    hero: 980,
+                    media: 1050,
+                    card: 820,
+                    text: 900
+                };
+
+                element.dataset.aosDuration = String(
+                    durations[category] || 880
+                );
+            });
+
+        root
+            .querySelectorAll(
+                [
+                    'main [class*="__grid"]',
+                    'main [class*="__list"]'
+                ].join(",")
+            )
+            .forEach((group) => {
+                Array.from(group.children)
+                    .filter((child) =>
+                        child.hasAttribute("data-aos")
+                    )
+                    .forEach((child, index) => {
+                        child.dataset.aosDelay = String(
+                            Math.min(index * 55, 165)
+                        );
+                    });
+            });
+    }
+
+
+    function observeDynamicAosContent() {
+        if (
+            premiumAosObserver ||
+            !document.body
+        ) {
+            return;
+        }
+
+        premiumAosObserver =
+            new MutationObserver((mutations) => {
+                const hasNewAnimatedContent =
+                    mutations.some((mutation) => {
+                        return Array.from(
+                            mutation.addedNodes
+                        ).some((node) => {
+                            if (
+                                node.nodeType !==
+                                Node.ELEMENT_NODE
+                            ) {
+                                return false;
+                            }
+
+                            return (
+                                node.matches?.(
+                                    "[data-aos], article, h2"
+                                ) ||
+                                node.querySelector?.(
+                                    "[data-aos], article, h2"
+                                )
+                            );
+                        });
+                    });
+
+                if (hasNewAnimatedContent) {
+                    refreshAos();
+                }
+            });
+
+        premiumAosObserver.observe(
+            document.body,
+            {
+                childList: true,
+                subtree: true
+            }
+        );
+    }
+
+
+    function initializeAos() {
+        if (premiumAosInitialized) {
+            return;
+        }
+
+        const reducedMotion =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+        if (
+            reducedMotion ||
             !window.AOS ||
             typeof window.AOS.init !== "function"
         ) {
-            documentElement.classList.add("aos-disabled");
+            documentElement.classList.add(
+                "aos-disabled"
+            );
+
             return;
         }
+
+        preparePremiumAos(document);
+
+        documentElement.classList.add(
+            "aos-premium",
+            "aos-ready"
+        );
 
         window.AOS.init({
-            duration: 720,
-            easing: "ease-out-cubic",
             once: true,
             mirror: false,
-            offset: 90,
+
+            duration: 900,
+            offset: 70,
             delay: 0,
-            anchorPlacement: "top-bottom"
+
+            easing: "ease-out-cubic",
+            anchorPlacement: "top-bottom",
+
+            throttleDelay: 80,
+            debounceDelay: 50,
+
+            disableMutationObserver: true
         });
+
+        premiumAosInitialized = true;
+
+        observeDynamicAosContent();
     }
 
-    function refreshAos() {
+
+    function refreshAos(scope = document) {
         if (
-            window.AOS &&
-            typeof window.AOS.refreshHard === "function"
+            !premiumAosInitialized ||
+            !window.AOS
         ) {
-            window.AOS.refreshHard();
             return;
         }
 
-        if (
-            window.AOS &&
-            typeof window.AOS.refresh === "function"
-        ) {
-            window.AOS.refresh();
-        }
+        preparePremiumAos(scope);
+
+        window.clearTimeout(
+            premiumAosRefreshTimer
+        );
+
+        premiumAosRefreshTimer =
+            window.setTimeout(() => {
+                if (
+                    typeof window.AOS.refreshHard ===
+                    "function"
+                ) {
+                    window.AOS.refreshHard();
+                    return;
+                }
+
+                if (
+                    typeof window.AOS.refresh ===
+                    "function"
+                ) {
+                    window.AOS.refresh();
+                }
+            }, 80);
     }
 
     function initializeFormDefaults() {

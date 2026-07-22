@@ -2797,3 +2797,221 @@ main,
         background: rgba(85, 199, 255, 0.45);
     }
 }
+
+/* =========================================================
+   PREMIUM GLOBAL AOS
+   ========================================================= */
+
+/*
+ * Стили включаются только после успешного запуска JS.
+ * Если AOS не загрузится, контент останется видимым.
+ */
+
+html.aos-premium [data-aos^="premium-"].aos-init {
+    opacity: 0;
+
+    translate: 0 26px;
+    scale: 0.99;
+
+    filter:
+        blur(6px) saturate(0.94);
+
+    backface-visibility: hidden;
+
+    transition-property:
+        opacity,
+        translate,
+        scale,
+        filter;
+
+    transition-timing-function:
+        cubic-bezier(0.16,
+            1,
+            0.3,
+            1);
+
+    will-change:
+        opacity,
+        translate,
+        scale,
+        filter;
+}
+
+
+/* Обычное плавное появление снизу */
+
+html.aos-premium [data-aos="premium-up"].aos-init {
+    translate: 0 30px;
+}
+
+
+/* Появление слева */
+
+html.aos-premium [data-aos="premium-left"].aos-init {
+    translate: 34px 0;
+}
+
+
+/* Появление справа */
+
+html.aos-premium [data-aos="premium-right"].aos-init {
+    translate: -34px 0;
+}
+
+
+/* Появление сверху */
+
+html.aos-premium [data-aos="premium-down"].aos-init {
+    translate: 0 -25px;
+}
+
+
+/* Мягкое увеличение */
+
+html.aos-premium [data-aos="premium-zoom"].aos-init {
+    translate: 0 14px;
+    scale: 0.955;
+}
+
+
+/* Карточки */
+
+html.aos-premium [data-aos="premium-card"].aos-init {
+    translate: 0 22px;
+    scale: 0.985;
+
+    filter:
+        blur(3px) saturate(0.96);
+}
+
+
+/* Изображения */
+
+html.aos-premium [data-aos="premium-media"].aos-init {
+    translate: 0 24px;
+    scale: 1.035;
+
+    opacity: 0.35;
+
+    filter:
+        blur(8px) saturate(0.88);
+}
+
+html.aos-premium [data-aos="premium-media-left"].aos-init {
+    translate: 38px 0;
+    scale: 1.035;
+
+    opacity: 0.35;
+
+    filter:
+        blur(8px) saturate(0.88);
+}
+
+html.aos-premium [data-aos="premium-media-right"].aos-init {
+    translate: -38px 0;
+    scale: 1.035;
+
+    opacity: 0.35;
+
+    filter:
+        blur(8px) saturate(0.88);
+}
+
+
+/* Hero — немного выразительнее */
+
+html.aos-premium [data-aos="premium-hero"].aos-init {
+    translate: 0 32px;
+    scale: 0.985;
+
+    filter:
+        blur(7px) saturate(0.94);
+}
+
+
+/* Конечное состояние */
+
+html.aos-premium [data-aos^="premium-"].aos-init.aos-animate {
+    opacity: 1;
+
+    translate: 0 0;
+    scale: 1;
+
+    filter:
+        blur(0) saturate(1);
+}
+
+
+/*
+ * Важно: мы используем отдельные CSS-свойства
+ * translate и scale, а не transform.
+ *
+ * Поэтому hover-transform карточек, кнопок и изображений
+ * продолжит нормально работать.
+ */
+
+html.aos-premium [data-aos^="premium-"].aos-animate {
+    will-change: auto;
+}
+
+
+/* Более лёгкая версия для планшетов и телефонов */
+
+@media (max-width: 768px) {
+    html.aos-premium [data-aos^="premium-"].aos-init {
+        translate: 0 18px;
+        scale: 0.992;
+
+        filter: blur(3px);
+    }
+
+    html.aos-premium [data-aos="premium-left"].aos-init,
+    html.aos-premium [data-aos="premium-media-left"].aos-init {
+        translate: 20px 0;
+    }
+
+    html.aos-premium [data-aos="premium-right"].aos-init,
+    html.aos-premium [data-aos="premium-media-right"].aos-init {
+        translate: -20px 0;
+    }
+
+    html.aos-premium [data-aos^="premium-"].aos-init.aos-animate {
+        translate: 0 0;
+        scale: 1;
+        filter: none;
+    }
+}
+
+
+/* AOS не загрузился — всё остаётся видимым */
+
+html.aos-disabled [data-aos] {
+    opacity: 1 !important;
+
+    translate: none !important;
+    scale: 1 !important;
+    transform: none !important;
+
+    filter: none !important;
+
+    transition: none !important;
+}
+
+
+/* Уважение системной настройки пользователя */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html.aos-premium [data-aos],
+    html.aos-disabled [data-aos] {
+        opacity: 1 !important;
+
+        translate: none !important;
+        scale: 1 !important;
+        transform: none !important;
+
+        filter: none !important;
+
+        transition: none !important;
+    }
+}
