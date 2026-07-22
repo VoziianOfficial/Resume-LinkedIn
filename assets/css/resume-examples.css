@@ -2907,3 +2907,20 @@
         display: none;
     }
 }
+
+@media (max-width: 768px) {
+
+    .examples-introduction,
+    .examples-newcomer {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .examples-introduction,
+    .examples-newcomer,
+    .examples-insight-slider__title {
+        display: none !important;
+    }
+}
