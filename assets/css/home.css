@@ -3722,3 +3722,10 @@
 .home-guidance-intro__visual {
     min-width: 0;
 }
+
+@media (max-width: 1024px) {
+    .home-purpose__content {
+        position: static;
+        top: auto;
+    }
+}
