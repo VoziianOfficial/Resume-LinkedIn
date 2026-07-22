@@ -88,8 +88,10 @@ window.NIMOMARK_CONFIG = {
             "longerIntroduction": "A strong resume should help a reader understand what you do, where you add value, and why your background is relevant. NimoMark helps candidates explore support for organizing complex experience, clarifying achievements, adding useful context, and adapting terminology for a selected role or market. Submitted requests may be reviewed and, where appropriate, connected with an independent resume specialist.",
             "iconName": "file-text",
             "mainImage": "assets/images/service-resume-writing.avif",
+            "leadingImage": "assets/images/home-career-guidance.avif",
             "supportingImage": "assets/images/home-resume-examples.avif",
             "mainImageAlt": "Professional reviewing career information and application materials",
+            "leadingImageAlt": "Professional reviewing career guidance notes",
             "supportingImageAlt": "Printed notes used to organize professional experience",
             "whoItMaySuit": [
                 {
@@ -179,8 +181,10 @@ window.NIMOMARK_CONFIG = {
             "longerIntroduction": "A LinkedIn profile often has to communicate direction before a reader opens a resume. NimoMark helps candidates explore support for improving the headline, About section, experience descriptions, skills direction, and consistency with other materials. The work focuses on professional clarity rather than promises of search ranking, recruiter messages, or profile visibility.",
             "iconName": "badge-check",
             "mainImage": "assets/images/service-linkedin-profile.avif",
+            "leadingImage": "assets/images/card-1.jpg",
             "supportingImage": "assets/images/about-career-conversation.avif",
             "mainImageAlt": "Professional considering their international career direction",
+            "leadingImageAlt": "Professional profile planning materials on a desk",
             "supportingImageAlt": "Career notes prepared for an online professional profile",
             "whoItMaySuit": [
                 {
@@ -270,8 +274,10 @@ window.NIMOMARK_CONFIG = {
             "longerIntroduction": "A useful cover letter should explain why the role is relevant, which experience supports the application, and what context deserves attention. NimoMark helps candidates explore support for creating a focused base structure that can be adapted for individual roles. No single letter is presented as suitable for every vacancy.",
             "iconName": "mail-open",
             "mainImage": "assets/images/service-cover-letter.avif",
+            "leadingImage": "assets/images/about-career-detail.avif",
             "supportingImage": "assets/images/services-material-alignment.avif",
             "mainImageAlt": "Professional writing a focused application letter",
+            "leadingImageAlt": "Professional reviewing focused application details",
             "supportingImageAlt": "Role and employer notes prepared before an application",
             "whoItMaySuit": [
                 {
@@ -361,8 +367,10 @@ window.NIMOMARK_CONFIG = {
             "longerIntroduction": "Technology resumes need enough detail to establish credibility while still explaining product context, responsibility, collaboration, and impact. NimoMark helps professionals explore support for organizing stack information, clarifying projects, describing architecture or delivery contribution, and communicating seniority in accessible language. Accuracy depends on the information supplied by the candidate.",
             "iconName": "code-2",
             "mainImage": "assets/images/service-it-resume.avif",
+            "leadingImage": "assets/images/contact-collaboration.avif",
             "supportingImage": "assets/images/services-career-benefits.avif",
             "mainImageAlt": "Technology professional working with a development team",
+            "leadingImageAlt": "Professionals discussing technical career materials",
             "supportingImageAlt": "Technical planning conversation in a modern workplace",
             "whoItMaySuit": [
                 {
@@ -452,8 +460,10 @@ window.NIMOMARK_CONFIG = {
             "longerIntroduction": "Moving into a new market can make familiar experience harder to interpret. Employer names may be unknown, role titles may carry different meanings, and qualifications may need concise explanation. NimoMark helps newcomers explore support for presenting transferable experience, relevant context, language skills, and professional direction without offering immigration, visa, tax, or legal advice.",
             "iconName": "globe-2",
             "mainImage": "assets/images/service-newcomer-resume.avif",
+            "leadingImage": "assets/images/about-career-team.avif",
             "supportingImage": "assets/images/contact-collaboration.avif",
             "mainImageAlt": "International professional adapting career materials for a new market",
+            "leadingImageAlt": "International professionals reviewing career direction",
             "supportingImageAlt": "Urban international environment representing relocation context",
             "whoItMaySuit": [
                 {
@@ -543,8 +553,10 @@ window.NIMOMARK_CONFIG = {
             "longerIntroduction": "Executive materials need to show how decisions, leadership, governance, delivery ownership, and stakeholder alignment connect. NimoMark helps senior candidates explore support for organizing leadership scope and strategic contribution without inventing financial metrics or overstating authority.",
             "iconName": "briefcase-business",
             "mainImage": "assets/images/service-executive-resume.avif",
+            "leadingImage": "assets/images/examples-resume-clarity.avif",
             "supportingImage": "assets/images/about-career-team.avif",
             "mainImageAlt": "Senior professional discussing organizational priorities",
+            "leadingImageAlt": "Executive career notes arranged for review",
             "supportingImageAlt": "Leadership planning session with executive career notes",
             "whoItMaySuit": [
                 {
@@ -634,8 +646,10 @@ window.NIMOMARK_CONFIG = {
             "longerIntroduction": "Interview preparation is not about memorizing perfect answers. It is about selecting relevant examples, structuring them clearly, and explaining decisions in a way another person can follow. NimoMark helps candidates explore role-specific preparation without guaranteeing interview success or employment outcomes.",
             "iconName": "messages-square",
             "mainImage": "assets/images/service-interview-preparation.avif",
+            "leadingImage": "assets/images/services-material-alignment.avif",
             "supportingImage": "assets/images/about-career-detail.avif",
             "mainImageAlt": "Candidate participating in a professional interview",
+            "leadingImageAlt": "Professional preparing structured interview examples",
             "supportingImageAlt": "Professional preparing examples before an interview",
             "whoItMaySuit": [
                 {
@@ -725,8 +739,10 @@ window.NIMOMARK_CONFIG = {
             "longerIntroduction": "International applications involve more than changing spelling or document length. Role titles, employer expectations, work arrangements, and familiar terminology can vary. NimoMark helps candidates explore support for aligning their resume, LinkedIn profile, cover letters, and interview narrative with a selected direction. No legal, visa, tax, or immigration advice is provided.",
             "iconName": "map-pin",
             "mainImage": "assets/images/service-international-positioning.avif",
+            "leadingImage": "assets/images/services-career-benefits.avif",
             "supportingImage": "assets/images/examples-resume-clarity.avif",
             "mainImageAlt": "International professional moving through a modern business district",
+            "leadingImageAlt": "International career planning materials in review",
             "supportingImageAlt": "Career planning materials related to global applications",
             "whoItMaySuit": [
                 {
