@@ -1196,6 +1196,163 @@
         document.head.append(script);
     }
 
+    (function () {
+        "use strict";
+
+        function formatSlideNumber(value) {
+            return String(value).padStart(2, "0");
+        }
+
+        function refreshInsightIcons(scope) {
+            if (
+                window.NimoMark &&
+                typeof window.NimoMark.refreshIcons === "function"
+            ) {
+                window.NimoMark.refreshIcons(scope);
+                return;
+            }
+
+            if (
+                window.lucide &&
+                typeof window.lucide.createIcons === "function"
+            ) {
+                window.lucide.createIcons({
+                    root: scope,
+                    attrs: {
+                        "aria-hidden": "true",
+                        focusable: "false"
+                    }
+                });
+            }
+        }
+
+        function initializeExamplesInsightSlider() {
+            const slider = document.querySelector(
+                "[data-examples-insight-slider]"
+            );
+
+            if (!slider || slider.swiper) {
+                return;
+            }
+
+            if (typeof window.Swiper !== "function") {
+                window.setTimeout(
+                    initializeExamplesInsightSlider,
+                    100
+                );
+
+                return;
+            }
+
+            const section = slider.closest(
+                ".examples-insight-slider"
+            );
+
+            if (!section) {
+                return;
+            }
+
+            const previousButton = section.querySelector(
+                "[data-examples-insight-previous]"
+            );
+
+            const nextButton = section.querySelector(
+                "[data-examples-insight-next]"
+            );
+
+            const currentElement = section.querySelector(
+                "[data-examples-insight-current]"
+            );
+
+            const totalElement = section.querySelector(
+                "[data-examples-insight-total]"
+            );
+
+            const progressElement = section.querySelector(
+                "[data-examples-insight-progress]"
+            );
+
+            const totalSlides = slider.querySelectorAll(
+                ".swiper-slide"
+            ).length;
+
+            if (totalElement) {
+                totalElement.textContent =
+                    formatSlideNumber(totalSlides);
+            }
+
+            function updateProgress(swiper) {
+                const currentIndex = swiper.realIndex + 1;
+                const progress =
+                    totalSlides > 0
+                        ? (currentIndex / totalSlides) * 100
+                        : 0;
+
+                if (currentElement) {
+                    currentElement.textContent =
+                        formatSlideNumber(currentIndex);
+                }
+
+                if (progressElement) {
+                    progressElement.style.width =
+                        `${progress}%`;
+                }
+
+                refreshInsightIcons(section);
+            }
+
+            new window.Swiper(slider, {
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+                speed: 760,
+                loop: true,
+                autoHeight: true,
+                effect: "fade",
+                fadeEffect: {
+                    crossFade: true
+                },
+                allowTouchMove: true,
+                grabCursor: true,
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true
+                },
+                navigation: {
+                    prevEl: previousButton,
+                    nextEl: nextButton
+                },
+                a11y: {
+                    enabled: true,
+                    prevSlideMessage:
+                        "Previous resume example insight",
+                    nextSlideMessage:
+                        "Next resume example insight"
+                },
+                on: {
+                    init(swiper) {
+                        updateProgress(swiper);
+                    },
+
+                    slideChange(swiper) {
+                        updateProgress(swiper);
+                    }
+                }
+            });
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener(
+                "DOMContentLoaded",
+                initializeExamplesInsightSlider,
+                {
+                    once: true
+                }
+            );
+        } else {
+            initializeExamplesInsightSlider();
+        }
+    })();
+
     function initializeResumeExamplesPage() {
         if (state.initialized) {
             return;
