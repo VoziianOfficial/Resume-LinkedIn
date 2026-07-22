@@ -2902,3 +2902,8 @@
         -webkit-line-clamp: 5;
     }
 }
+@media (max-width: 768px) {
+    .examples-introduction {
+        display: none;
+    }
+}
