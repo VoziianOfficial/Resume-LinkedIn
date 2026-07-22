@@ -2734,3 +2734,435 @@ body {
     }
 }
 
+/* =========================================================
+   SERVICE SUPPORT — CONTRAST DESIGNER CARDS
+   ========================================================= */
+
+.service-support {
+    position: relative;
+    max-width: 100%;
+}
+
+.service-support__layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.9rem, 1.7vw, 1.3rem);
+    border: 0;
+}
+
+/* Общая карточка */
+.service-support__layout>.service-support__entry {
+    --support-background: #ffffff;
+    --support-title-color: #101012;
+    --support-text-color: #5f626b;
+    --support-accent: #55c7ff;
+    --support-icon-color: #126d9d;
+    --support-icon-background: #dff5ff;
+    --support-icon-border: rgba(18, 109, 157, 0.18);
+    --support-border: rgba(16, 16, 18, 0.1);
+    --support-glow: rgba(85, 199, 255, 0.22);
+
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 190px;
+    align-content: end;
+    gap: 0.55rem;
+    overflow: hidden;
+
+    padding:
+        clamp(4.5rem, 6vw, 5rem) clamp(1.2rem, 2.2vw, 1.7rem) clamp(1.2rem, 2.2vw, 1.6rem);
+
+    border: 1px solid var(--support-border);
+    border-radius: clamp(1.25rem, 2vw, 1.7rem);
+
+    color: var(--support-title-color);
+    background: var(--support-background) !important;
+
+    box-shadow:
+        0 20px 48px rgba(16, 16, 18, 0.09),
+        0 5px 16px rgba(16, 16, 18, 0.035),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+    isolation: isolate;
+
+    transition:
+        border-color 320ms ease,
+        box-shadow 450ms ease;
+}
+
+/* Убираем старые табличные границы */
+.service-support__layout>.service-support__entry {
+    border-right: 1px solid var(--support-border) !important;
+    border-bottom: 1px solid var(--support-border) !important;
+}
+
+/* Свечение в правом верхнем углу */
+.service-support__entry::before {
+    position: absolute;
+    z-index: -1;
+    top: -5rem;
+    right: -4rem;
+    bottom: auto;
+
+    width: 12rem;
+    height: 12rem;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: var(--support-glow);
+    filter: blur(30px);
+
+    opacity: 0.68;
+    transform: scale(0.78);
+
+    transition:
+        opacity 400ms ease,
+        transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    content: "";
+}
+
+/* Акцентная линия снизу */
+.service-support__entry::after {
+    position: absolute;
+    right: 1.4rem;
+    bottom: 0;
+    left: 1.4rem;
+
+    height: 3px;
+    border-radius: 999px 999px 0 0;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            var(--support-accent),
+            transparent);
+
+    opacity: 0.35;
+    transform: scaleX(0.45);
+
+    transition:
+        opacity 320ms ease,
+        transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    content: "";
+}
+
+/* =========================================================
+   CARD 1 — CLEAN WHITE + BLUE
+   ========================================================= */
+
+.service-support__entry:nth-child(4n + 1) {
+    --support-background:
+        linear-gradient(145deg,
+            #ffffff 0%,
+            #edf8fd 100%);
+
+    --support-title-color: #101012;
+    --support-text-color: #555a64;
+    --support-accent: #35b8f3;
+
+    --support-icon-color: #087eb8;
+    --support-icon-background: #d9f3ff;
+    --support-icon-border: rgba(8, 126, 184, 0.22);
+
+    --support-border: rgba(53, 184, 243, 0.22);
+    --support-glow: rgba(53, 184, 243, 0.26);
+}
+
+/* =========================================================
+   CARD 2 — STRONG ORANGE
+   ========================================================= */
+
+.service-support__entry:nth-child(4n + 2) {
+    --support-background:
+        linear-gradient(145deg,
+            #ffb665 0%,
+            #ff8b4a 100%);
+
+    --support-title-color: #101012;
+    --support-text-color: rgba(16, 16, 18, 0.72);
+    --support-accent: #101012;
+
+    --support-icon-color: #101012;
+    --support-icon-background: rgba(255, 255, 255, 0.38);
+    --support-icon-border: rgba(16, 16, 18, 0.14);
+
+    --support-border: rgba(255, 115, 55, 0.42);
+    --support-glow: rgba(255, 77, 28, 0.3);
+
+    box-shadow:
+        0 24px 56px rgba(255, 107, 48, 0.2),
+        0 6px 18px rgba(16, 16, 18, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+/* =========================================================
+   CARD 3 — VIVID BLUE
+   ========================================================= */
+
+.service-support__entry:nth-child(4n + 3) {
+    --support-background:
+        linear-gradient(145deg,
+            #69d0ff 0%,
+            #3aaee9 100%);
+
+    --support-title-color: #08141c;
+    --support-text-color: rgba(8, 20, 28, 0.7);
+    --support-accent: #ff9c51;
+
+    --support-icon-color: #ffffff;
+    --support-icon-background: rgba(8, 20, 28, 0.18);
+    --support-icon-border: rgba(255, 255, 255, 0.3);
+
+    --support-border: rgba(24, 144, 201, 0.35);
+    --support-glow: rgba(255, 255, 255, 0.25);
+
+    box-shadow:
+        0 24px 58px rgba(29, 151, 210, 0.24),
+        0 6px 18px rgba(16, 16, 18, 0.045),
+        inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
+/* =========================================================
+   CARD 4 — PREMIUM DARK
+   ========================================================= */
+
+.service-support__entry:nth-child(4n) {
+    --support-background:
+        radial-gradient(circle at 94% 7%,
+            rgba(85, 199, 255, 0.2),
+            transparent 36%),
+        linear-gradient(145deg,
+            #101012 0%,
+            #28282f 100%);
+
+    --support-title-color: #ffffff;
+    --support-text-color: rgba(255, 255, 255, 0.68);
+    --support-accent: #ffad5b;
+
+    --support-icon-color: #55c7ff;
+    --support-icon-background: rgba(255, 255, 255, 0.07);
+    --support-icon-border: rgba(85, 199, 255, 0.25);
+
+    --support-border: rgba(255, 255, 255, 0.1);
+    --support-glow: rgba(85, 199, 255, 0.2);
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 27px 64px rgba(5, 5, 6, 0.28),
+        0 7px 20px rgba(5, 5, 6, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* =========================================================
+   ICON — TOP RIGHT
+   ========================================================= */
+
+.service-support__icon {
+    position: absolute;
+    z-index: 3;
+    top: clamp(1rem, 1.8vw, 1.3rem);
+    right: clamp(1rem, 1.8vw, 1.3rem);
+
+    display: inline-flex;
+    width: 58px;
+    height: 58px;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--support-icon-border);
+    border-radius: 50%;
+
+    color: var(--support-icon-color) !important;
+    background: var(--support-icon-background);
+
+    box-shadow:
+        0 14px 32px rgba(16, 16, 18, 0.11),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition:
+        color 300ms ease,
+        border-color 300ms ease,
+        background-color 300ms ease,
+        box-shadow 400ms ease,
+        transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-support__icon svg {
+    width: 29px;
+    height: 29px;
+    stroke-width: 1.5;
+}
+
+/* =========================================================
+   TEXT — FORCED CORRECT CONTRAST
+   ========================================================= */
+
+.service-support__layout .service-support__entry .service-support__entry-title {
+    position: relative;
+    z-index: 1;
+
+    max-width: 16ch;
+    margin: 0;
+
+    color: var(--support-title-color) !important;
+
+    font-size: clamp(1.2rem, 1.65vw, 1.55rem);
+    font-weight: 650;
+    letter-spacing: -0.038em;
+    line-height: 1.1;
+}
+
+/* Акцент перед заголовком */
+.service-support__entry-title::before {
+    display: block;
+    width: 38px;
+    height: 3px;
+    margin-bottom: 0.65rem;
+
+    border-radius: 999px;
+    background: var(--support-accent);
+
+    transition:
+        width 400ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    content: "";
+}
+
+.service-support__layout .service-support__entry .service-support__entry-text {
+    position: relative;
+    z-index: 1;
+
+    max-width: 43ch;
+    margin: 0;
+
+    color: var(--support-text-color) !important;
+
+    font-size: clamp(0.79rem, 0.9vw, 0.87rem);
+    line-height: 1.56;
+}
+
+/* =========================================================
+   HOVERS
+   ========================================================= */
+
+.service-support__entry:hover,
+.service-support__entry:focus-within {
+    border-color: var(--support-accent);
+
+    box-shadow:
+        0 30px 70px rgba(16, 16, 18, 0.16),
+        0 9px 24px rgba(85, 199, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.service-support__entry:hover::before,
+.service-support__entry:focus-within::before {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+.service-support__entry:hover::after,
+.service-support__entry:focus-within::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.service-support__entry:hover .service-support__icon,
+.service-support__entry:focus-within .service-support__icon {
+    color: #101012 !important;
+    border-color: #ffad5b;
+    background: #ffad5b;
+
+    box-shadow:
+        0 18px 38px rgba(255, 141, 68, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+    transform:
+        translateY(-5px) rotate(-6deg) scale(1.06);
+}
+
+.service-support__entry:hover .service-support__entry-title::before,
+.service-support__entry:focus-within .service-support__entry-title::before {
+    width: 66px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .service-support__layout>.service-support__entry {
+        min-height: 180px;
+        padding:
+            4.3rem 1.2rem 1.2rem;
+    }
+
+    .service-support__icon {
+        width: 54px;
+        height: 54px;
+    }
+
+    .service-support__icon svg {
+        width: 27px;
+        height: 27px;
+    }
+}
+
+@media (max-width: 620px) {
+    .service-support__layout {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .service-support__layout>.service-support__entry {
+        min-height: 160px;
+
+        padding:
+            4rem 1.05rem 1.05rem;
+
+        border-radius: 1.2rem;
+    }
+
+    .service-support__icon {
+        top: 0.85rem;
+        right: 0.85rem;
+
+        width: 48px;
+        height: 48px;
+    }
+
+    .service-support__icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .service-support__layout .service-support__entry .service-support__entry-title {
+        max-width: 19ch;
+        font-size: 1.15rem;
+    }
+
+    .service-support__layout .service-support__entry .service-support__entry-text {
+        font-size: 0.78rem;
+        line-height: 1.48;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .service-support__entry,
+    .service-support__entry::before,
+    .service-support__entry::after,
+    .service-support__icon,
+    .service-support__entry-title::before {
+        transition: none;
+        transform: none;
+    }
+}
